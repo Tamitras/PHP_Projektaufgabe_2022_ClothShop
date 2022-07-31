@@ -7,21 +7,38 @@
 
 <body onload="bodyLoaded()">
 
-    <div>
+    <div class="MainContainer">
+
         <!-- Header -->
         <div id="header"></div>
-    </div>
-    <div>
         <!-- Content -->
+        <div class="content"></div>
     </div>
-
 
 </body>
 
 </html>
 
-<script>
+<style>
+    body {
+        /* overrides the default 8px margin  */
+        margin: 0 !important;
+        background-color: rgb(41, 37, 44);
+    }
 
+    .MainContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr
+    }
+
+    .content
+    {
+        background-color: rgb(41, 37, 44);
+    }
+</style>
+
+<script>
     // Rendert den Header (Logo, Warenkorb etc)
     $(function() {
         $("#header").load("/../templates/header/header.php");
