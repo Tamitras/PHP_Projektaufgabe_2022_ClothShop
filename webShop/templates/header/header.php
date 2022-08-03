@@ -62,17 +62,15 @@
     <div class="row align-items-center bg-white border-bottom">
         <div class="col-5 d-flex justify-content-center">
             <span class="text-black">
-
                 1-24 von mehr als 30.000 Ergebnissen oder Vorschlägen für "hdmi kabel"
             </span>
         </div>
-
 
         <!-- Space -->
         <div class="col-4"></div>
 
 
-        <div id="NavBarExplore" class="col d-flex justify-content-end pt-1 pb-1">
+        <div class="col d-flex justify-content-end">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Sortieren
