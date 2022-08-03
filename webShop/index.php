@@ -12,7 +12,8 @@ ini_set('display_errors', 'On');
 <head>
     <title>WebShop 1390365 Erik Kaufmann</title>
     <meta charset="utf-8">
-    <!-- <link media="all" type="text/css" rel="assets/bootstrap-5.0.2/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a65f36b132.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 
@@ -23,15 +24,7 @@ ini_set('display_errors', 'On');
         <!-- <div id="header"></div> -->
         <?php include '../webShop/templates/header/header.php' ?>
 
-        <div class="container" style="color: white; background: rgb(35 35 35); border-radius:25px;">
-
-            <!-- Searchbar -->
-            <div class="container-fluid pt-2">
-                <form class="d-flex">
-                    <input style="background: rgb(35 35 35);" class="form-control me-2" type="search" placeholder="Suche nach Produkt" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
+        <div class="container" style="color: white; background: rgb(235 237 237); border-radius:25px;">
 
 
 
@@ -45,8 +38,8 @@ ini_set('display_errors', 'On');
                     //    echo "mmäööögg";
                     // }
                 ?>
-                    <div class="col-xs-12 col-xl-3 col-lg-4">
-                        <div class="card m-2 p-3" style="background: rgb(23 23 23); border-radius:25px;">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-xxl-3 col-lg-6 col-xl-4">
+                        <div class="card m-2 p-3" style="border-radius:25px;">
                             <div class="col border-3 buttonNoSelect">
                                 <img style="background: black; border-radius:25px;" src="assets/Shoes/orange.svg" class="card-img-top p-3">
                             </div>
@@ -100,8 +93,8 @@ ini_set('display_errors', 'On');
         </div>
     </div>
 
-    <script src="https://use.fontawesome.com/43573797bc.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
     <!-- <script src="assets/bootstrap-5.0.2/js/bootstrap.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
@@ -112,7 +105,7 @@ ini_set('display_errors', 'On');
     body {
         /* overrides the default 8px margin  */
         margin: 0 !important;
-        background-color: rgb(23, 23, 23);
+        /* background-color: rgb(23, 23, 23); */
     }
 
     .buttonNoSelect {
@@ -132,7 +125,12 @@ ini_set('display_errors', 'On');
     //     $("#header").load("templates/header/header.php");
     // });
 
+
+
     function bodyLoaded() {
+
+        // run Clock
+        startTime();
 
         // /../ --> navigates one level back or up 
         // in this case from /index to /root(htdocs)
