@@ -1,16 +1,19 @@
 <?php
 
-function test()
+function GetTestData($param)
 {
-    echo "Ich bin ein Test";
+    echo "Ich bin ein Test - aber was soll ich mit $param anfangen?";
 }
 
 if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
     $action = $_GET['action'];
+    $param1 = $_GET['param1'];
 
     switch ($action) {
-        case "test": {
-                return test();
+        case "GetTestData": {
+
+                echo $param1;
+                return GetTestData($param1);
             }
             break;
 

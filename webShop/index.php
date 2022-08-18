@@ -12,21 +12,26 @@ ini_set('display_errors', 'On');
 <head>
     <title>WebShop 1390365 Erik Kaufmann</title>
     <meta charset="utf-8">
+
+    <!-- Importiere index.js als Modul mit eigenem Scope/Funktionen/Routinen ==> Module Pattern -->
+    <script type="module" src="./index.js"></script>
+
+    <!-- Importiere externe Bibliotheken wie z.B. Bootstrap, JQuery und FontAwesome (Icons) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/a65f36b132.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 
-<body onload="bodyLoaded()">
+<body>
     <div class="MainContainer">
 
-        <!-- Header -->
-        <!-- <div id="header"></div> -->
+        <!-- Place Header -->
         <?php include '../webShop/templates/header/header.php' ?>
 
+
+        <!-- MainContainer -->
         <div class="container" style="color: white; background: rgb(235 237 237); border-radius:25px;">
-
-
 
             <!-- content -->
             <div class="row">
@@ -54,52 +59,21 @@ ini_set('display_errors', 'On');
                             </div>
                         </div>
                     </div>
-
                 <?php } ?>
-
             </div>
         </div>
 
-        <!-- footer -->
-        <div class="container mt-5">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <svg class="bi" width="30" height="24">
-                            <use xlink:href="#bootstrap"></use>
-                        </svg>
-                    </a>
-                    <span class="text-muted">© 2022 Kfm Shop, Inc</span>
-                </div>
+        <!-- Place Footer -->
+        <?php include '../webShop/templates/footer/footer.php' ?>
 
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-muted" href="#">
-                            <svg class="bi" width="24" height="24">
-                                <use xlink:href="#twitter"></use>
-                            </svg></a>
-                    </li>
-                    <li class="ms-3"><a class="text-muted" href="#">
-                            <svg class="bi" width="24" height="24">
-                                <use xlink:href="#instagram"></use>
-                            </svg></a>
-                    </li>
-                    <li class="ms-3"><a class="text-muted" href="#">
-                            <svg class="bi" width="24" height="24">
-                                <use xlink:href="#facebook"></use>
-                            </svg></a>
-                    </li>
-                </ul>
-            </footer>
-        </div>
     </div>
-
-
-
-    <!-- <script src="assets/bootstrap-5.0.2/js/bootstrap.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+<script>
+
+</script>
 
 <style>
     body {
@@ -118,32 +92,3 @@ ini_set('display_errors', 'On');
         pointer-events: none;
     }
 </style>
-
-<script>
-    // Rendert den Header (Logo, Warenkorb etc) via Javascript
-    // $(function() {
-    //     $("#header").load("templates/header/header.php");
-    // });
-
-
-
-    function bodyLoaded() {
-
-        // run Clock
-        startTime();
-
-        // /../ --> navigates one level back or up 
-        // in this case from /index to /root(htdocs)
-        let url = "service/mainservice.php?action=test";
-
-        $.ajax({
-            url: url,
-            type: "GET",
-            success: function(response) {
-                // alert(response);
-                console.log("url", url);
-            }
-        });
-
-    }
-</script>
