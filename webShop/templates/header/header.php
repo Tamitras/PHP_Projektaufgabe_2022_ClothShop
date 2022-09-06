@@ -19,7 +19,7 @@
                 <form action="" class="flex-grow-1">
                     <div class="input-group">
                         <input id="searchInput" oninput="index.onchangedEvent()" type="text" class="form-control form-control-lg" placeholder="Suche nach Produkt">
-                        <button  onclick="index.search(this.value)" class="input-group-text btn-success bg-danger">
+                        <button onclick="index.search(this.value)" class="input-group-text btn-success bg-danger">
                             <i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>

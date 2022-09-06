@@ -1,4 +1,3 @@
-
 /*
 Mehr Informationen über Module Pattern:
 
@@ -8,13 +7,16 @@ Mehr Informationen über Module Pattern:
 */
 
 //
-import { header as head, consoleHelper as helper } from "./templates/header/header.js";
+import {
+    header as head,
+    consoleHelper as helper
+} from "./templates/header/header.js";
 
 //
 export const index = (function () {
     //
     const searchInput = document.getElementById('searchInput');
-
+    
     // Async Callback
     const success = (response) => {
         helper.log(response);
@@ -49,7 +51,6 @@ export const index = (function () {
 
     //
     function bodyLoaded() {
-
         init();
     }
 
@@ -74,8 +75,7 @@ export const index = (function () {
         bodyLoaded: bodyLoaded,
         search: search,
         onchangedEvent: onchangedEvent,
-        content:
-        {
+        content: {
             searchTerm: "",
             shoes: []
         }
