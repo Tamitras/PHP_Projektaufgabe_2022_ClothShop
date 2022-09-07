@@ -1,8 +1,23 @@
 <?php
+// Include Model
+include_once("Models/Shoe.php");
+
 session_start();
 // Fehleranalyse
 error_reporting(-1);
 ini_set('display_errors', 'On');
+$_SESSION["isCart"] = false;
+$data_for_view = null;
+
+function renderPhpFile($filename, $vars = null)
+{
+    if (is_array($vars) && !empty($vars)) {
+        extract($vars);
+    }
+    ob_start();
+    include $filename;
+    return ob_get_clean();
+}
 
 ?>
 
@@ -31,16 +46,7 @@ ini_set('display_errors', 'On');
         <?php include '../webShop/templates/header/header.php' ?>
 
         <!-- ContentContainer -->
-        <div class="container" style="color: white; background: rgb(235 237 237); border-radius:25px;">
-
-            <?php if ($_SESSION("isCart")) { ?>
-                <!-- Show Cart View -->
-                <?php include '../webShop/templates/content/cart.php' ?>
-            <?php } else { ?>
-                <!-- Show list with shoes -->
-                <?php include '../webShop/templates/content/shoes.php' ?>
-            <?php } ?>
-        </div>
+        <div id ="content" style="background: rgb(235 237 237); border-radius:25px;"> </div>
 
         <!-- Place Footer -->
         <?php include '../webShop/templates/footer/footer.php' ?>
@@ -49,10 +55,6 @@ ini_set('display_errors', 'On');
 </body>
 
 </html>
-
-<script>
-
-</script>
 
 <style>
     body {

@@ -1,27 +1,26 @@
 <?php
 // Hinzufügen des Scopes für das Model Shoe
 require '../Models/Shoe.php';
+// include_once("../Models/Shoe.php");
+
 ?>
 <?php
 session_start();
 
 function GetTestData()
 {
-    $output = "keine Jobs - ";
-    $tempJobs = $GLOBALS['jobs'];
+    $_SESSION["shoes"] = array();
 
-    $_SESSION['name'] = "Dies ist ein Test";
+    array_push(
+        $_SESSION["shoes"],
+        new Shoe(1, "Schuh1", 0, "Schuh der nicht passen wird", "assets/Shoes/orange.svg"),
+        new Shoe(2, "Schuh2", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/green.svg"),
+        new Shoe(3, "Schuh3", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+        new Shoe(4, "Schuh4", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/pink.svg"),
+        new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+    );
 
-    foreach ($tempJobs as $job) {
-        $output .= "<tr>";
-        $output .= "<td>" . $job['name'] . "</td>";
-        // $output .=  "<td>".$job['$jobTitle']."</td>";
-        // $output .=  "<td>".$job['$jobStartDate']."</td>";
-        // $output .=  "<td>".$job['$jobDuration']."</td>";
-        // $output .=  "<td>".$job['$qty']."</td></tr>"  
-    }
-
-    echo $output;
+    print_r($_SESSION["shoes"]);
 }
 
 function AddToCart(Shoe $shoe)
@@ -37,6 +36,20 @@ function AddToCart(Shoe $shoe)
 function RemoveFromCart(Shoe $shoe)
 {
     // TODO
+}
+
+function ShowCart()
+{
+    if (isset($_SESSION["isCart"])) {
+        $_SESSION["isCart"] = true;
+    }
+}
+
+function ShowShoes()
+{
+    if (isset($_SESSION["isCart"])) {
+        $_SESSION["isCart"] = false;
+    }
 }
 
 function GetData(string $query = null)
@@ -68,7 +81,6 @@ if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
     switch ($action) {
         case "GetTestData": {
 
-                echo $param1;
                 return GetTestData($param1);
             }
             break;

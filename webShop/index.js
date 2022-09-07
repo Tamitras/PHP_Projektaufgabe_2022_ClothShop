@@ -16,10 +16,14 @@ import {
 export const index = (function () {
     //
     const searchInput = document.getElementById('searchInput');
-    
+
     // Async Callback
     const success = (response) => {
         helper.log(response);
+    }
+
+    const refreshContent = (response) => {
+        $("#content").html(response);
     }
     // Async Callback
     const error = (msg) => {
@@ -27,19 +31,57 @@ export const index = (function () {
     }
 
     //
-    const ajaxGet = (action, param1) => {
+    const ajaxGet = (url, action = "", param1 = "") => {
+
+        if (url == null) {
+            url = "service/mainservice.php";
+        }
+
+        if (action != null) {
+            action = `?action=${action}`;
+            if (param1) {
+                param1 = `&param1=${param1}`;
+            }
+        }
+        else {
+            action = "";
+            param1 = "";
+        }
+
+        url = url + action + param1;
 
         $.ajax({
-            url: "service/mainservice.php?action=" + `${action}` + "&param1=" + `${param1}`,
+            // url: "service/mainservice.php?action=" + `${action}` + "&param1=" + `${param1}`,
+            url: url,
             type: "GET",
             success: function (response) {
                 success(response);
+
+                if(response != "")
+                {
+                    refresh();
+                }
             },
             error: function (msg) {
                 helper.log(msg, error);
             }
         });
     }
+
+    const refresh = () => 
+    {
+        $.ajax({
+            url: "templates/content/shoes.php?action=ShowShoes",
+            type: "GET",
+            success: function (response) {
+                refreshContent(response);
+            },
+            error: function (msg) {
+                helper.log(msg, error);
+            }
+        });
+    }
+
     //
     function init() {
         helper.log("Initialize Webshop");
@@ -47,6 +89,8 @@ export const index = (function () {
         // run Clock
         helper.log("Run Clock");
         head.startTime();
+
+        refresh();
     }
 
     //
@@ -67,7 +111,8 @@ export const index = (function () {
         // 1. Action
         // 2. Param
         // helper.log(`${this.searchTerm}`);
-        ajaxGet("GetTestData", `${this.searchTerm}`);
+        ajaxGet("service/mainservice.php", "GetTestData", `${this.searchTerm}`);
+
     }
     //
     return {

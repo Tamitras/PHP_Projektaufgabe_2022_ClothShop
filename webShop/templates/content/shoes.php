@@ -1,42 +1,58 @@
 <?php
+include("../../Models/Shoe.php");
+session_start();
 
-// Ließt Daten aus der Sessionvariable
-if (isset($_SESSION['name'])) {
-    echo "Name: " . $_SESSION['name'];
-}
-?>
+if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
+    $action = $_GET['action'];
 
-<?php
+    switch ($action) {
+        case "ShowShoes": {
+                echo ShowShoes();
+            }
+            break;
 
-// Shoes zeigt nur Shoes an (gefiltert)
-if (isset($_SESSION['shoes'])) {
-    echo "Name: " . $_SESSION['shoes'];
-    $shoes = $_SESSION['shoes'];
-}
-
-?>
-
-
-<?php  for ($x = 0; $x > 0; $x++) { ?>
-<div class="col-xs-12 col-sm-12 col-md-6 col-xxl-3 col-lg-6 col-xl-4">
-    <div class="card m-2 p-3" style="border-radius:25px;">
-        <div class="col border-3 buttonNoSelect">
-            <img style="background: black; border-radius:25px;" src="assets/Shoes/orange.svg" class="card-img-top p-3">
-        </div>
-        <div class="col">
-
-            <div class="card-body">
-                <h5 class="card-title">Orange Shoes</h5>
-                <p class="card-text">Orange shoes directly from the moon</p>
-                <a href="#" class="btn btn-primary">Details</a>
-                <a href="#" class="btn btn-success">In den Warenkorb</a>
-            </div>
-        </div>
-    </div>
-</div>
-<?php } ?>
+        default: {
+                // do not forget to return default data, if you need it...
+            }
+    }
+} ?>
 
 
 <?php
+
+function ShowShoes()
+{
+    if (!isset($_SESSION["shoes"])) {
+        print_r("keine shoes");
+        return null;
+    }
+
+    $shoesContent = "<div class='row'>";
+    $shoes = $_SESSION["shoes"];
+    
+    foreach ($shoes as $key=>$shoe) {
+        // echo var_dump($shoe);
+        $temp = "";
+        // sprintf("%s %s",$temp, $shoe->Name);
+
+        $shoesContent .='<div class="col-xs-12 col-sm-12 col-md-6 col-xxl-3 col-lg-6 col-xl-4">
+                                <div class="card m-2 p-3" style="border-radius:25px;">
+                                    <div class="col border-3 buttonNoSelect">
+                                        <img style="background: black; border-radius:25px;" src=' .$shoe->Src .' class="card-img-top p-3">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <h5 class="card-title">' . $shoe->Name . '</h5>
+                                            <p class="card-text">' .$shoe->Description .'</p>
+                                            <a href="#" class="btn btn-primary">Details</a>
+                                            <a href="#" class="btn btn-success">In den Warenkorb</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+    }
+    $shoesContent .= "</div>";
+    return $shoesContent;
+}
 
 ?>

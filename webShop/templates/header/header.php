@@ -12,7 +12,6 @@
                     <div class="col-12">Aktuelle Uhrzeit</div>
                     <div id="clock" class="col-12 clock text-white"></div>
                 </div>
-
             </div>
             <div class="col d-flex justify-content-center">
                 <!-- Searchbar -->
@@ -25,10 +24,9 @@
                 </form>
             </div>
 
-            <!-- <div class="col"></div> -->
             <div class="col-2 d-flex buttonNoSelect flex-fixed-width-item">Letzte Bestellung!?</div>
-            <div id="Cart" class="col-2 d-flex buttonNoSelect flex-fixed-width-item">
 
+            <div id="card" class="col-2 d-flex flex-fixed-width-item">
                 <div class="row">
                     Warenkorb
                     <div class="col">
@@ -90,8 +88,8 @@
         </div>
     </div>
 
-    <script>
-        const elCart = $("#Cart");
+    <script aria-details="cart">
+        const elCart = $("#card");
         elCart.mouseover(function() {
             elCart.css("border", "1px solid white").css("cursor", "pointer");
         });
@@ -99,13 +97,14 @@
             elCart.css("border", "").css("cursor", "");
         });
 
-        elCart.click(() =>
-        {
+        elCart.click(() => {
             // Bei Click auf elCart
             // Zeige den kompletten Warenkorb im Content an
             // Ajax call an php
+            alert("TEST");
+            <?php session_destroy(); ?>
+            $(".shoes").load(location.href + " .shoes");
         });
-
     </script>
 
     <script aria-details="NavBarHerren">
