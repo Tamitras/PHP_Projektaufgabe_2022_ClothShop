@@ -6,8 +6,18 @@ if (isset($_SESSION['name'])) {
 }
 ?>
 
+<?php
 
-<?php  for ($x = 0; $x <= 10; $x++) { ?>
+// Shoes zeigt nur Shoes an (gefiltert)
+if (isset($_SESSION['shoes'])) {
+    echo "Name: " . $_SESSION['shoes'];
+    $shoes = $_SESSION['shoes'];
+}
+
+?>
+
+
+<?php  for ($x = 0; $x > 0; $x++) { ?>
 <div class="col-xs-12 col-sm-12 col-md-6 col-xxl-3 col-lg-6 col-xl-4">
     <div class="card m-2 p-3" style="border-radius:25px;">
         <div class="col border-3 buttonNoSelect">

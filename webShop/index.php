@@ -33,8 +33,13 @@ ini_set('display_errors', 'On');
         <!-- ContentContainer -->
         <div class="container" style="color: white; background: rgb(235 237 237); border-radius:25px;">
 
-                    <!-- Place Content -->
-            <?php include '../webShop/templates/content/shoes.php' ?>
+            <?php if ($_SESSION("isCart")) { ?>
+                <!-- Show Cart View -->
+                <?php include '../webShop/templates/content/cart.php' ?>
+            <?php } else { ?>
+                <!-- Show list with shoes -->
+                <?php include '../webShop/templates/content/shoes.php' ?>
+            <?php } ?>
         </div>
 
         <!-- Place Footer -->

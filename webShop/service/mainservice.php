@@ -1,36 +1,64 @@
 <?php
+// Hinzufügen des Scopes für das Model Shoe
+require '../Models/Shoe.php';
+?>
+<?php
 session_start();
 
-// function GetTestData($param)
-// {
-//     echo "Ich bin ein Test - aber was soll ich mit $param anfangen?";
-// }
-
-$jobs = array
-  (
-  array('name'=>'LW12345'),
-  array('name'=>'LW15783'),
-  array('name'=>'DG12345'),
-  array('name'=>'LK17543')
-);
-
-function GetTestData() {
+function GetTestData()
+{
     $output = "keine Jobs - ";
     $tempJobs = $GLOBALS['jobs'];
 
     $_SESSION['name'] = "Dies ist ein Test";
 
-    foreach ($tempJobs as $job)   {
-            $output .= "<tr>";
-            $output .= "<td>".$job['name']."</td>";
-            // $output .=  "<td>".$job['$jobTitle']."</td>";
-            // $output .=  "<td>".$job['$jobStartDate']."</td>";
-            // $output .=  "<td>".$job['$jobDuration']."</td>";
-            // $output .=  "<td>".$job['$qty']."</td></tr>"  
-   }
+    foreach ($tempJobs as $job) {
+        $output .= "<tr>";
+        $output .= "<td>" . $job['name'] . "</td>";
+        // $output .=  "<td>".$job['$jobTitle']."</td>";
+        // $output .=  "<td>".$job['$jobStartDate']."</td>";
+        // $output .=  "<td>".$job['$jobDuration']."</td>";
+        // $output .=  "<td>".$job['$qty']."</td></tr>"  
+    }
 
-//    return $output;
-   echo $output;
+    echo $output;
+}
+
+function AddToCart(Shoe $shoe)
+{
+    // get data from session
+    if (isset($_SESSION['Cart'])) {
+
+        $cart = $_SESSION["Cart"];
+        array_push($cart->Shoes, $shoe);
+    }
+}
+
+function RemoveFromCart(Shoe $shoe)
+{
+    // TODO
+}
+
+function GetData(string $query = null)
+{
+    $db_link = mysqli_connect(
+        // MYSQL_HOST,
+        // MYSQL_BENUTZER,
+        // MYSQL_KENNWORT,
+        // MYSQL_DATENBANK
+        "host",
+        "username",
+        "password",
+        "database"
+    );
+
+    $sql = "SELECT * FROM adressen";
+    $sql2 = $query;
+
+    $db_erg = mysqli_query($db_link, $sql);
+    if (!$db_erg) {
+        // die('Ungültige Abfrage: ' . mysqli_error());
+    }
 }
 
 if (isset($_GET['action']) && !empty(isset($_GET['action']))) {

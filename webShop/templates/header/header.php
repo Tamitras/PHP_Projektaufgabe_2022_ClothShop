@@ -27,7 +27,18 @@
 
             <!-- <div class="col"></div> -->
             <div class="col-2 d-flex buttonNoSelect flex-fixed-width-item">Letzte Bestellung!?</div>
-            <div class="col-2 d-flex buttonNoSelect flex-fixed-width-item">Warenkorb</div>
+            <div id="Cart" class="col-2 d-flex buttonNoSelect flex-fixed-width-item">
+
+                <div class="row">
+                    Warenkorb
+                    <div class="col">
+                        Anzahl: 3
+                    </div>
+                    <div class="col">
+                        Gesamt: 12€
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="navBar" class="row align-items-center text-white pt-1 pb-1" style="background-color: rgb(35 47 62); height:41px;">
@@ -79,6 +90,23 @@
         </div>
     </div>
 
+    <script>
+        const elCart = $("#Cart");
+        elCart.mouseover(function() {
+            elCart.css("border", "1px solid white").css("cursor", "pointer");
+        });
+        elCart.mouseout(function() {
+            elCart.css("border", "").css("cursor", "");
+        });
+
+        elCart.click(() =>
+        {
+            // Bei Click auf elCart
+            // Zeige den kompletten Warenkorb im Content an
+            // Ajax call an php
+        });
+
+    </script>
 
     <script aria-details="NavBarHerren">
         const elHerren = $("#NavBarHerren");
