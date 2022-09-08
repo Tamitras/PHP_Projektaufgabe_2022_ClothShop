@@ -25,13 +25,18 @@ export const index = (function () {
     const refreshContent = (response) => {
         $("#content").html(response);
     }
+
+    const refreshHead = (response) => {
+        console.log("refreshCard_HEAD", response);
+        $("#cartHead").html(response);
+    }
     // Async Callback
     const error = (msg) => {
         helper.log(msg, "error");
     }
 
     //
-    const ajaxGet = (url, action = "", param1 = "", type = "") => {
+    const ajaxGet = (url, action = "", param1 = "", type = "shoes") => {
 
         if (url == null) {
             url = "service/mainservice.php";
@@ -57,8 +62,7 @@ export const index = (function () {
             success: function (response) {
                 success(response);
 
-                if(response != "")
-                {
+                if (response == "1") {
                     refresh(type);
                 }
             },
@@ -68,36 +72,48 @@ export const index = (function () {
         });
     }
 
-    function addToCart(index)
-    {
-        alert(index);
-
-        ajaxGet("service/mainservice.php", "AddToCart", index, `cart`);
+    function addToCart(index) {
+        ajaxGet("service/mainservice.php", "AddToCart", `${index}`, `cart`);
     }
 
-    function refresh(type) 
-    {
+    function refresh(type) {
         let url = "";
-        switch(type)
-        {
+        switch (type) {
             case "shoes":
                 url = "templates/content/shoes.php?action=ShowShoes";
                 break;
 
             case "cart":
-                url ="templates/content/cart.php?action=ShowCart";
+                url = "templates/content/cart.php?action=ShowCart";
+                break;
+
+            case "cartHead":
+                url = "templates/content/cart.php?action=RefreshHeadCart";
                 break;
 
             default:
-                url ="templates/content/shoes.php?action=ShowShoes";
-            break;
+                url = "templates/content/shoes.php?action=ShowShoes";
+                break;
         }
+
+        console.log("Url: ", url);
 
         $.ajax({
             url: url,
             type: "GET",
             success: function (response) {
-                refreshContent(response);
+
+                console.log("RefreshByType", type);
+
+                if (type == "cart") {
+                    refresh("cartHead");
+                }
+                else if (type == "cartHead") {
+                    refreshHead(response);
+                }
+                else {
+                    refreshContent(response);
+                }
             },
             error: function (msg) {
                 helper.log(msg, error);
@@ -113,6 +129,7 @@ export const index = (function () {
         helper.log("Run Clock");
         head.startTime();
 
+        // load initial data
         ajaxGet("service/mainservice.php", "GetTestData", ``, "shoes");
     }
 
@@ -123,7 +140,6 @@ export const index = (function () {
 
     //
     function onchangedEvent() {
-
         if (searchInput && searchInput.value) {
             this.searchTerm = searchInput.value;
         }
@@ -131,23 +147,19 @@ export const index = (function () {
 
     //
     function search() {
-        // 1. Action
-        // 2. Param
-        // helper.log(`${this.searchTerm}`);
         ajaxGet("service/mainservice.php", "GetTestData", `${this.searchTerm}`, "shoes");
-
     }
     //
     return {
         init: init,
         bodyLoaded: bodyLoaded,
         search: search,
-        refresh:refresh,
-        addToCart:addToCart,
+        refresh: refresh,
+        addToCart: addToCart,
         onchangedEvent: onchangedEvent,
         content: {
             searchTerm: "",
-            shoes: []
+            shoes: [],
         }
     };
 }());

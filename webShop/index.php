@@ -2,12 +2,12 @@
 // Include Model
 include_once("Models/Shoe.php");
 
+// Start Session
 session_start();
+
 // Fehleranalyse
 error_reporting(-1);
 ini_set('display_errors', 'On');
-$_SESSION["isCart"] = false;
-$data_for_view = null;
 
 function renderPhpFile($filename, $vars = null)
 {
@@ -43,13 +43,13 @@ function renderPhpFile($filename, $vars = null)
     <div class="MainContainer">
 
         <!-- Place Header -->
-        <?php include '../webShop/templates/header/header.php' ?>
+        <?php include_once '../webShop/templates/header/header.php' ?>
 
         <!-- ContentContainer -->
         <div id="content"> </div>
 
         <!-- Place Footer -->
-        <?php include '../webShop/templates/footer/footer.php' ?>
+        <?php include_once '../webShop/templates/footer/footer.php' ?>
 
     </div>
 </body>
@@ -78,3 +78,24 @@ function renderPhpFile($filename, $vars = null)
         border-radius: 25px;
     }
 </style>
+<?php
+
+$_SESSION["shoes"] = array();
+$_SESSION["cart"] = array();
+
+array_push(
+    $_SESSION["shoes"],
+    new Shoe(1, "Schuh1", 0, "Schuh der nicht passen wird", "assets/Shoes/orange.svg"),
+    new Shoe(2, "Schuh2", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/green.svg"),
+    new Shoe(3, "Schuh3", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+    new Shoe(4, "Schuh4", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/pink.svg"),
+    new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+);
+
+// array_push(
+//     $_SESSION["cart"],
+//     new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+//     new Shoe(1, "Schuh1", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+// );
+
+?>

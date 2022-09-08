@@ -52,7 +52,7 @@ function ShowShoes()
                                             <h5 class="card-title">' . $shoe->Name . '</h5>
                                             <p class="card-text">' . $shoe->Description .'</p>
                                             <a href="#" class="btn btn-primary">Details</a>
-                                            <button onclick="index.addToCart('. $key .');" class="btn btn-success">In den Warenkorb</button>
+                                            <button onclick="index.addToCart('. $shoe->Id .');" class="btn btn-success">In den Warenkorb</button>
                                         </div>
                                     </div>
                                 </div>

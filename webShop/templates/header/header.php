@@ -15,27 +15,19 @@
             </div>
             <div class="col d-flex justify-content-center">
                 <!-- Searchbar -->
-                <form action="" class="flex-grow-1">
+                <div class="flex-grow-1">
                     <div class="input-group">
                         <input id="searchInput" oninput="index.onchangedEvent()" type="text" class="form-control form-control-lg" placeholder="Suche nach Produkt">
                         <button onclick="index.search(this.value)" class="input-group-text btn-success bg-danger">
                             <i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
-                </form>
+                </div>
             </div>
 
             <div class="col-2 d-flex buttonNoSelect flex-fixed-width-item">Letzte Bestellung!?</div>
 
-            <div id="card" class="col-2 d-flex flex-fixed-width-item">
-                <div class="row">
-                    Warenkorb
-                    <div class="col">
-                        Anzahl: 3
-                    </div>
-                    <div class="col">
-                        Gesamt: 12€
-                    </div>
-                </div>
+            <div id="cartHead" class="col-2 d-flex flex-fixed-width-item">
+                
             </div>
         </div>
 
@@ -72,7 +64,6 @@
             <!-- Space -->
             <div class="col-4"></div>
 
-
             <div class="col d-flex justify-content-end">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,7 +92,6 @@
             // Bei Click auf elCart
             // Zeige den kompletten Warenkorb im Content an
             // Ajax call an php
-            <?php session_destroy(); ?>
             index.refresh("cart");
         });
     </script>

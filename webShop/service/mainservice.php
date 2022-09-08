@@ -3,43 +3,39 @@
 require '../Models/Shoe.php';
 // include_once("../Models/Shoe.php");
 
+
+
 ?>
 <?php
 session_start();
 
 function GetTestData()
 {
-    $_SESSION["shoes"] = array();
-    $_SESSION["cart"] = array();
-
-    array_push(
-        $_SESSION["shoes"],
-        new Shoe(1, "Schuh1", 0, "Schuh der nicht passen wird", "assets/Shoes/orange.svg"),
-        new Shoe(2, "Schuh2", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/green.svg"),
-        new Shoe(3, "Schuh3", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
-        new Shoe(4, "Schuh4", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/pink.svg"),
-        new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
-    );
-
-    array_push(
-        $_SESSION["cart"],
-        new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
-        new Shoe(5, "Schuh1", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
-    );
-
-    print_r($_SESSION["shoes"]);
-
-    // echo $_SESSION["shoes"];
+    echo true;
 }
 
-function AddToCart(Shoe $shoe)
+function AddToCart(int $index)
 {
     // get data from session
-    if (isset($_SESSION['Cart'])) {
+    if (isset($_SESSION['cart']) && isset($_SESSION["shoes"])) {
 
-        $cart = $_SESSION["Cart"];
-        array_push($cart->Shoes, $shoe);
-        echo "Shoe hinzugefügt";
+        $shoes = $_SESSION["shoes"];
+        $shoe = null;
+
+        foreach ($shoes as $s) {
+            if ($index == $s->Id) {
+                $shoe = $s;
+            }
+        }
+
+        if ($shoe == null) {
+            return;
+        }
+
+        array_push($_SESSION["cart"], $shoe);
+        echo true;
+    } else {
+        echo false;
     }
 }
 
@@ -48,7 +44,7 @@ function RemoveFromCart(Shoe $shoe)
     // TODO
 }
 
-function ShowCart()
+function UpdateCart()
 {
     if (isset($_SESSION["isCart"])) {
         $_SESSION["isCart"] = true;
@@ -86,17 +82,18 @@ function GetData(string $query = null)
 
 if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
     $action = $_GET['action'];
-    $param1 = $_GET['param1'];
 
     switch ($action) {
         case "GetTestData": {
-                return GetTestData($param1);
+                GetTestData();
             }
             break;
 
-        case "AddToCart":
-            {
-                AddToCart($param1);
+        case "AddToCart": {
+                if (isset($_GET['param1'])) {
+                    $param1 = $_GET['param1'];
+                    AddToCart($param1);
+                }
             }
 
         default: {
