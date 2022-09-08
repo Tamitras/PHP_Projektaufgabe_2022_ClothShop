@@ -17,15 +17,12 @@ if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
     }
 } ?>
 
-
 <?php
 
 if (isset($_GET['shoeIndex'])) {
 
     $index = $_GET["shoeIndex"];
-
     $shoe = $shoes[$index];
-
     AddToCart($shoe);
 }
 

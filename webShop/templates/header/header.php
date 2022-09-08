@@ -24,11 +24,7 @@
                 </div>
             </div>
 
-            <div class="col-2 d-flex buttonNoSelect flex-fixed-width-item">Letzte Bestellung!?</div>
-
-            <div id="cartHead" class="col-2 d-flex flex-fixed-width-item">
-                
-            </div>
+            <div id="cartHead" class="col-2 d-flex flex-fixed-width-item"></div>
         </div>
 
         <div id="navBar" class="row align-items-center text-white pt-1 pb-1" style="background-color: rgb(35 47 62); height:41px;">
@@ -79,8 +75,8 @@
         </div>
     </div>
 
-    <script aria-details="cart">
-        const elCart = $("#card");
+    <script aria-details="cartHead">
+        const elCart = $("#cartHead");
         elCart.mouseover(function() {
             elCart.css("border", "1px solid white").css("cursor", "pointer");
         });

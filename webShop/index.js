@@ -63,7 +63,12 @@ export const index = (function () {
                 success(response);
 
                 if (response == "1") {
-                    refresh(type);
+                    if (action.includes("AddToCart")) {
+                        refresh("cartHead");
+                    }
+                    else {
+                        refresh(type);
+                    }
                 }
             },
             error: function (msg) {
@@ -103,16 +108,23 @@ export const index = (function () {
             type: "GET",
             success: function (response) {
 
-                console.log("RefreshByType", type);
+                // console.log("RefreshByType", type);
 
-                if (type == "cart") {
-                    refresh("cartHead");
-                }
-                else if (type == "cartHead") {
-                    refreshHead(response);
-                }
-                else {
-                    refreshContent(response);
+                switch (type) {
+                    case "shoes":
+                        refreshContent(response);
+                        break;
+
+                    case "cart":
+                        refreshContent(response);
+                        break;
+
+                    case "cartHead":
+                        refreshHead(response);
+                        break;
+
+                    default:
+                        break;
                 }
             },
             error: function (msg) {
