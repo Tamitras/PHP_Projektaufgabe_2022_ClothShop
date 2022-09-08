@@ -31,7 +31,7 @@ export const index = (function () {
     }
 
     //
-    const ajaxGet = (url, action = "", param1 = "") => {
+    const ajaxGet = (url, action = "", param1 = "", type = "") => {
 
         if (url == null) {
             url = "service/mainservice.php";
@@ -59,7 +59,7 @@ export const index = (function () {
 
                 if(response != "")
                 {
-                    refresh();
+                    refresh(type);
                 }
             },
             error: function (msg) {
@@ -68,10 +68,33 @@ export const index = (function () {
         });
     }
 
-    const refresh = () => 
+    function addToCart(index)
     {
+        alert(index);
+
+        ajaxGet("service/mainservice.php", "AddToCart", index, `cart`);
+    }
+
+    function refresh(type) 
+    {
+        let url = "";
+        switch(type)
+        {
+            case "shoes":
+                url = "templates/content/shoes.php?action=ShowShoes";
+                break;
+
+            case "cart":
+                url ="templates/content/cart.php?action=ShowCart";
+                break;
+
+            default:
+                url ="templates/content/shoes.php?action=ShowShoes";
+            break;
+        }
+
         $.ajax({
-            url: "templates/content/shoes.php?action=ShowShoes",
+            url: url,
             type: "GET",
             success: function (response) {
                 refreshContent(response);
@@ -90,7 +113,7 @@ export const index = (function () {
         helper.log("Run Clock");
         head.startTime();
 
-        refresh();
+        ajaxGet("service/mainservice.php", "GetTestData", ``, "shoes");
     }
 
     //
@@ -111,7 +134,7 @@ export const index = (function () {
         // 1. Action
         // 2. Param
         // helper.log(`${this.searchTerm}`);
-        ajaxGet("service/mainservice.php", "GetTestData", `${this.searchTerm}`);
+        ajaxGet("service/mainservice.php", "GetTestData", `${this.searchTerm}`, "shoes");
 
     }
     //
@@ -119,6 +142,8 @@ export const index = (function () {
         init: init,
         bodyLoaded: bodyLoaded,
         search: search,
+        refresh:refresh,
+        addToCart:addToCart,
         onchangedEvent: onchangedEvent,
         content: {
             searchTerm: "",

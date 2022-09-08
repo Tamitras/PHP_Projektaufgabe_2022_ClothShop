@@ -101,9 +101,8 @@
             // Bei Click auf elCart
             // Zeige den kompletten Warenkorb im Content an
             // Ajax call an php
-            alert("TEST");
             <?php session_destroy(); ?>
-            $(".shoes").load(location.href + " .shoes");
+            index.refresh("cart");
         });
     </script>
 

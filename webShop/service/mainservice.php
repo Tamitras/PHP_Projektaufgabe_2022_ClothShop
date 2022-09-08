@@ -10,6 +10,7 @@ session_start();
 function GetTestData()
 {
     $_SESSION["shoes"] = array();
+    $_SESSION["cart"] = array();
 
     array_push(
         $_SESSION["shoes"],
@@ -20,7 +21,15 @@ function GetTestData()
         new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
     );
 
+    array_push(
+        $_SESSION["cart"],
+        new Shoe(5, "Schuh5", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+        new Shoe(5, "Schuh1", 0, "Schmerzt schon beim Ansehen",  "assets/Shoes/blue.svg"),
+    );
+
     print_r($_SESSION["shoes"]);
+
+    // echo $_SESSION["shoes"];
 }
 
 function AddToCart(Shoe $shoe)
@@ -30,6 +39,7 @@ function AddToCart(Shoe $shoe)
 
         $cart = $_SESSION["Cart"];
         array_push($cart->Shoes, $shoe);
+        echo "Shoe hinzugefügt";
     }
 }
 
@@ -80,15 +90,14 @@ if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
 
     switch ($action) {
         case "GetTestData": {
-
                 return GetTestData($param1);
             }
             break;
 
-        case "two": {
-                return 2; // or call here two();
+        case "AddToCart":
+            {
+                AddToCart($param1);
             }
-            break;
 
         default: {
                 // do not forget to return default data, if you need it...

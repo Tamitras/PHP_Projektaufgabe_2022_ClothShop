@@ -46,7 +46,7 @@ function renderPhpFile($filename, $vars = null)
         <?php include '../webShop/templates/header/header.php' ?>
 
         <!-- ContentContainer -->
-        <div id ="content" style="background: rgb(235 237 237); border-radius:25px;"> </div>
+        <div id="content"> </div>
 
         <!-- Place Footer -->
         <?php include '../webShop/templates/footer/footer.php' ?>
@@ -71,5 +71,10 @@ function renderPhpFile($filename, $vars = null)
         -o-user-select: none;
 
         pointer-events: none;
+    }
+
+    #content {
+        background: rgb(235 237 237);
+        border-radius: 25px;
     }
 </style>
