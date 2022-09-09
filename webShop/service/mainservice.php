@@ -1,9 +1,6 @@
 <?php
 // Hinzufügen des Scopes für das Model Shoe
 require '../Models/Shoe.php';
-// include_once("../Models/Shoe.php");
-
-
 
 ?>
 <?php
@@ -33,15 +30,37 @@ function AddToCart(int $index)
         }
 
         array_push($_SESSION["cart"], $shoe);
+
         echo true;
     } else {
         echo false;
     }
 }
 
-function RemoveFromCart(Shoe $shoe)
+function unsetValue(array $array, $value, $strict = TRUE)
 {
-    // TODO
+    if(($key = array_search($value, $array, $strict)) !== FALSE) {
+        unset($array[$key]);
+    }
+    return $array;
+}
+
+function RemoveFromCart(int $index)
+{
+    // get data from session
+    if (isset($_SESSION['cart'])) {
+
+        //Remove from array
+        foreach($_SESSION["cart"] as $key=>$row){
+            if($row->Id == $index){
+              unset($_SESSION["cart"][$key]);
+            }
+        } 
+
+        echo true;
+    } else {
+        echo false;
+    }
 }
 
 function UpdateCart()
@@ -95,6 +114,14 @@ if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
                     AddToCart($param1);
                 }
             }
+            break;
+        case "RemoveFromCart": {
+                if (isset($_GET['param1'])) {
+                    $param1 = $_GET['param1'];
+                    RemoveFromCart($param1);
+                }
+            }
+            break;
 
         default: {
                 // do not forget to return default data, if you need it...

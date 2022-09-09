@@ -19,7 +19,7 @@ export const index = (function () {
 
     // Async Callback
     const success = (response) => {
-        helper.log(response);
+        // helper.log(response);
     }
 
     const refreshContent = (response) => {
@@ -27,7 +27,7 @@ export const index = (function () {
     }
 
     const refreshHead = (response) => {
-        console.log("refreshCard_HEAD", response);
+        // console.log("refreshCard_HEAD", response);
         $("#cartHead").html(response);
     }
     // Async Callback
@@ -63,8 +63,13 @@ export const index = (function () {
                 success(response);
 
                 if (response == "1") {
-                    if (action.includes("AddToCart")) {
+                    if (action.includes("Add") ) {
                         refresh("cartHead");
+                    }
+                    else if(action.includes("Remove"))
+                    {
+                        refresh("cartHead");
+                        refresh("cart");
                     }
                     else {
                         refresh(type);
@@ -78,7 +83,13 @@ export const index = (function () {
     }
 
     function addToCart(index) {
+        console.log("addToCart:", index);
         ajaxGet("service/mainservice.php", "AddToCart", `${index}`, `cart`);
+    }
+    
+    function removeFromCart(id) {
+        console.log("removeFromCart:", id);
+        ajaxGet("service/mainservice.php", "RemoveFromCart", `${id}`, `cart`);
     }
 
     function refresh(type) {
@@ -113,6 +124,7 @@ export const index = (function () {
                 switch (type) {
                     case "shoes":
                         refreshContent(response);
+                        refresh("cartHead");
                         break;
 
                     case "cart":
@@ -168,6 +180,7 @@ export const index = (function () {
         search: search,
         refresh: refresh,
         addToCart: addToCart,
+        removeFromCart:removeFromCart,
         onchangedEvent: onchangedEvent,
         content: {
             searchTerm: "",

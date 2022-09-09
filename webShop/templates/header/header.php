@@ -1,7 +1,7 @@
     <div class="container-fluid sticky-top mb-3" style="background-color: rgb(19 25 33)">
 
         <div class="row pb-2 pt-1 align-items-center text-white">
-            <div class="col-2 d-flex justify-content-start flex-fixed-width-item" style="padding-left: 0px;">
+            <div id="mainLogo" onclick="index.search(this.value)" class="col-2 d-flex justify-content-start flex-fixed-width-item" style="padding-left: 0px;">
                 <div class="buttonNoSelect ml-0 pl-0">
                     <img src="/webShop/assets/Header/logo.svg" width="auto" height="80">
                 </div>
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div id="cartHead" class="col-2 d-flex flex-fixed-width-item"></div>
+            <div id="cartHead" class="col-3 p-n1 me-2 d-flex flex-fixed-width-item"></div>
         </div>
 
         <div id="navBar" class="row align-items-center text-white pt-1 pb-1" style="background-color: rgb(35 47 62); height:41px;">
@@ -50,14 +50,13 @@
             </div>
         </div>
 
-        <div class="row align-items-center bg-white border-bottom">
+        <!-- <div class="row align-items-center bg-white border-bottom">
             <div class="col-5 d-flex justify-content-center">
                 <span class="text-black">
                     1-24 von mehr als 30.000 Ergebnissen oder Vorschlägen für "hdmi kabel"
                 </span>
             </div>
 
-            <!-- Space -->
             <div class="col-4"></div>
 
             <div class="col d-flex justify-content-end">
@@ -72,8 +71,21 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
+
+    <script>
+        const mainLogoEl = $("#mainLogo");
+
+        mainLogoEl.mouseover(function() {
+            mainLogoEl.css("cursor", "pointer");
+        });
+        mainLogoEl.mouseout(function() {
+            mainLogoEl.css("border", "").css("cursor", "");
+        });
+
+
+    </script>
 
     <script aria-details="cartHead">
         const elCart = $("#cartHead");

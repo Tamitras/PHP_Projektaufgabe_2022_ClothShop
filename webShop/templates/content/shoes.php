@@ -46,9 +46,10 @@ function ShowShoes()
                                     <div class="col">
                                         <div class="card-body">
                                             <div hidden>'.$shoe->Id .' </div>
-                                            <h5 class="card-title">' . $shoe->Name . '</h5>
-                                            <p class="card-text">' . $shoe->Description .'</p>
-                                            <a href="#" class="btn btn-primary">Details</a>
+                                            <h5 class="card-title">Titel: ' . $shoe->Name . '</h5>
+                                            <p class="card-text">Beschreibung: ' . $shoe->Description .'</p>
+                                            <p class="card-text">Preis: ' . $shoe->Price .'€</p>
+                                            <a hidden href="#" class="btn btn-primary">Details</a>
                                             <button onclick="index.addToCart('. $shoe->Id .');" class="btn btn-success">In den Warenkorb</button>
                                         </div>
                                     </div>

@@ -34,7 +34,7 @@ function renderPhpFile($filename, $vars = null)
         <?php include '../webShop/templates/header/header.php' ?>
 
         <!-- ContentContainer -->
-        <div id="content"> </div>
+        <div id="content"></div>
 
         <!-- Place Footer -->
         <?php include '../webShop/templates/footer/footer.php' ?>
@@ -64,6 +64,8 @@ function renderPhpFile($filename, $vars = null)
     #content {
         background: rgb(235 237 237);
         border-radius: 25px;
+        margin: 15px;
+        padding: 15px;
     }
 </style>
 <?php
