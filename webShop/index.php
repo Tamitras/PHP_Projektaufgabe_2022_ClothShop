@@ -31,13 +31,13 @@ function renderPhpFile($filename, $vars = null)
     <div class="MainContainer">
 
         <!-- Place Header -->
-        <?php include '../webShop/templates/header/header.php' ?>
+        <?php include './templates/header/header.php' ?>
 
         <!-- ContentContainer -->
         <div id="content"></div>
 
         <!-- Place Footer -->
-        <?php include '../webShop/templates/footer/footer.php' ?>
+        <?php include './templates/footer/footer.php' ?>
 
     </div>
 </body>

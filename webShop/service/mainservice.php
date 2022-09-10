@@ -37,25 +37,24 @@ function AddToCart(int $index)
     }
 }
 
-function unsetValue(array $array, $value, $strict = TRUE)
-{
-    if(($key = array_search($value, $array, $strict)) !== FALSE) {
-        unset($array[$key]);
-    }
-    return $array;
-}
-
 function RemoveFromCart(int $index)
 {
     // get data from session
     if (isset($_SESSION['cart'])) {
 
+        echo '<pre>';
+        var_dump($_SESSION);
+        echo '</pre>';
+
         //Remove from array
-        foreach($_SESSION["cart"] as $key=>$row){
-            if($row->Id == $index){
-              unset($_SESSION["cart"][$key]);
+        foreach ($_SESSION["cart"] as $key => $row) {
+            if ($row->Id == $index) {
+
+                echo array_search($key,$_SESSION["cart"],true);
+
+                // unset($_SESSION["cart"][$key]);
             }
-        } 
+        }
 
         echo true;
     } else {

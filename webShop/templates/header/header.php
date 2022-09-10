@@ -3,7 +3,7 @@
         <div class="row pb-2 pt-1 align-items-center text-white">
             <div id="mainLogo" onclick="index.search(this.value)" class="col-2 d-flex justify-content-start flex-fixed-width-item" style="padding-left: 0px;">
                 <div class="buttonNoSelect ml-0 pl-0">
-                    <img src="/webShop/assets/Header/logo.svg" width="auto" height="80">
+                    <img src="/assets/Header/logo.svg" width="auto" height="80">
                 </div>
             </div>
             <div class="col-2 col-offset-2 d-flex justify-content-center buttonNoSelect flex-fixed-width-item">
