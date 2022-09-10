@@ -10,7 +10,7 @@ Mehr Informationen über Module Pattern:
 import {
     header as head,
     consoleHelper as helper
-} from "./templates/header/header.js";
+} from "./js/header.js";
 
 //
 export const index = (function () {
@@ -63,11 +63,10 @@ export const index = (function () {
                 success(response);
 
                 if (response == "1") {
-                    if (action.includes("Add") ) {
+                    if (action.includes("Add")) {
                         refresh("cartHead");
                     }
-                    else if(action.includes("Remove"))
-                    {
+                    else if (action.includes("Remove")) {
                         refresh("cartHead");
                         refresh("cart");
                     }
@@ -84,9 +83,38 @@ export const index = (function () {
 
     function addToCart(index) {
         console.log("addToCart:", index);
-        ajaxGet("service/mainservice.php", "AddToCart", `${index}`, `cart`);
+
+        $.ajax({
+            type: "POST",
+            url: "service/mainservice.php",
+            data: { action: 'AddToCart', param1: index },
+            success: function (response) {
+                helper.log(response, error);
+            },
+            error: function (msg) {
+                helper.log(msg, error);
+            }
+        }).done(function (msg) {
+            helper.log(msg, error);
+        });
+
+        // $('#btnAddToCart').click(function () {
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "service/mainservice.php",
+        //         data: { action: 'AddToCart', param1: index },
+        //         success: function (response) {
+        //             helper.log(msg, error);
+        //         },
+        //         error: function (msg) {
+        //             helper.log(msg, error);
+        //         }
+        //     }).done(function (msg) {
+        //         helper.log(msg, error);
+        //     });
+        // });
     }
-    
+
     function removeFromCart(id) {
         console.log("removeFromCart:", id);
         ajaxGet("service/mainservice.php", "RemoveFromCart", `${id}`, `cart`);
@@ -180,7 +208,7 @@ export const index = (function () {
         search: search,
         refresh: refresh,
         addToCart: addToCart,
-        removeFromCart:removeFromCart,
+        removeFromCart: removeFromCart,
         onchangedEvent: onchangedEvent,
         content: {
             searchTerm: "",

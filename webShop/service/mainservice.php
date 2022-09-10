@@ -2,8 +2,6 @@
 // Hinzufügen des Scopes für das Model Shoe
 require '../Models/Shoe.php';
 
-?>
-<?php
 session_start();
 
 function GetTestData()
@@ -98,8 +96,8 @@ function GetData(string $query = null)
     }
 }
 
-if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
-    $action = $_GET['action'];
+if (isset($_POST['action']) && !empty(isset($_POST['action']))) {
+    $action = $_POST['action'];
 
     switch ($action) {
         case "GetTestData": {
@@ -108,15 +106,15 @@ if (isset($_GET['action']) && !empty(isset($_GET['action']))) {
             break;
 
         case "AddToCart": {
-                if (isset($_GET['param1'])) {
-                    $param1 = $_GET['param1'];
+                if (isset($_POST['param1'])) {
+                    $param1 = $_POST['param1'];
                     AddToCart($param1);
                 }
             }
             break;
         case "RemoveFromCart": {
-                if (isset($_GET['param1'])) {
-                    $param1 = $_GET['param1'];
+                if (isset($_POST['param1'])) {
+                    $param1 = $_POST['param1'];
                     RemoveFromCart($param1);
                 }
             }
