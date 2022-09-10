@@ -1,8 +1,18 @@
 <?php
+function autoload($className)
+{
+    require_once "Models/Shoe.php";
+}
+
+spl_autoload_register('autoload');
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 require __DIR__ . '/header.php';
 ?>
 
-<section>
+<section class="content">
     <div class="row">
         <?php if (isset($_SESSION["shoes"]) && count($_SESSION["shoes"]) > 0) : ?>
 
@@ -20,7 +30,7 @@ require __DIR__ . '/header.php';
                                 <p class="card-text">Beschreibung: <?php echo $shoe->Description ?> </p>
                                 <p class="card-text">Preis: <?php echo $shoe->Price ?> €</p>
                                 <a hidden href="#" class="btn btn-primary">Details</a>
-                                <button id="btnAddToCart"  onclick="index.addToCart('<?php echo $shoe->Id ?>');" class="btn btn-success">In den Warenkorb</button>
+                                <button id="btnAddToCart" onclick="index.addToCart('<?php echo $shoe->Id ?>');" class="btn btn-success">In den Warenkorb</button>
                             </div>
                         </div>
                     </div>
@@ -31,9 +41,7 @@ require __DIR__ . '/header.php';
 </section>
 
 
-<!--
-Start Call To Action
-==================================== -->
+<!-- ==================================== -->
 <section class="call-to-action bg-gray section">
     <div class="container">
         <div class="row">

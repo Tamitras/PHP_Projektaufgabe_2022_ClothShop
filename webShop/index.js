@@ -16,19 +16,31 @@ import {
 export const index = (function () {
     //
     const searchInput = document.getElementById('searchInput');
+    $('#cartHead').click(function () {
+        redirect("/cart.php");
+    });
 
-    // Async Callback
-    const success = (response) => {
-        // helper.log(response);
+    function redirect(path) {
+        if (!window.location.href.includes(path));
+        {
+            window.location.href = path;
+        }
     }
 
-    const refreshContent = (response) => {
-        $("#content").html(response);
-    }
-
-    const refreshHead = (response) => {
-        // console.log("refreshCard_HEAD", response);
-        $("#cartHead").html(response);
+    const refreshHead = () => {
+        $.ajax({
+            type: "POST",
+            url: "service/mainservice.php",
+            data: { action: 'RefreshHeadCart' },
+            success: function (response) {
+                $("#cartHead").html(response);
+            },
+            error: function (msg) {
+                helper.log(msg, "error");
+            }
+        }).done(function (msg) {
+            helper.log(msg, "normal");
+        });
     }
     // Async Callback
     const error = (msg) => {
@@ -82,43 +94,33 @@ export const index = (function () {
     }
 
     function addToCart(index) {
-        console.log("addToCart:", index);
+        // console.log("addToCart:", index);
 
         $.ajax({
             type: "POST",
             url: "service/mainservice.php",
             data: { action: 'AddToCart', param1: index },
             success: function (response) {
-                helper.log(response, error);
+                helper.log(response, "special");
+
+                if (response == "1") {
+                    // Refresh
+                    refreshHead();
+                }
             },
             error: function (msg) {
-                helper.log(msg, error);
+                helper.log(msg, "error");
             }
         }).done(function (msg) {
-            helper.log(msg, error);
+            helper.log(msg, "normal");
         });
-
-        // $('#btnAddToCart').click(function () {
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "service/mainservice.php",
-        //         data: { action: 'AddToCart', param1: index },
-        //         success: function (response) {
-        //             helper.log(msg, error);
-        //         },
-        //         error: function (msg) {
-        //             helper.log(msg, error);
-        //         }
-        //     }).done(function (msg) {
-        //         helper.log(msg, error);
-        //     });
-        // });
     }
 
     function removeFromCart(id) {
         console.log("removeFromCart:", id);
         ajaxGet("service/mainservice.php", "RemoveFromCart", `${id}`, `cart`);
     }
+
 
     function refresh(type) {
         let url = "";
@@ -131,10 +133,6 @@ export const index = (function () {
                 url = "templates/content/cart.php?action=ShowCart";
                 break;
 
-            case "cartHead":
-                url = "templates/content/cart.php?action=RefreshHeadCart";
-                break;
-
             default:
                 url = "templates/content/shoes.php?action=ShowShoes";
                 break;
@@ -144,7 +142,7 @@ export const index = (function () {
 
         $.ajax({
             url: url,
-            type: "GET",
+            type: "POST",
             success: function (response) {
 
                 // console.log("RefreshByType", type);
@@ -159,10 +157,6 @@ export const index = (function () {
                         refreshContent(response);
                         break;
 
-                    case "cartHead":
-                        refreshHead(response);
-                        break;
-
                     default:
                         break;
                 }
@@ -174,20 +168,13 @@ export const index = (function () {
     }
 
     //
-    function init() {
+    function bodyLoaded() {
+        // Initialize
         helper.log("Initialize Webshop");
 
         // run Clock
         helper.log("Run Clock");
         head.startTime();
-
-        // load initial data
-        ajaxGet("service/mainservice.php", "GetTestData", ``, "shoes");
-    }
-
-    //
-    function bodyLoaded() {
-        init();
     }
 
     //
@@ -199,20 +186,27 @@ export const index = (function () {
 
     //
     function search() {
+        // filter data
         ajaxGet("service/mainservice.php", "GetTestData", `${this.searchTerm}`, "shoes");
     }
+
+    function getHome() {
+
+        redirect("/home.php");
+    }
+
     //
     return {
-        init: init,
         bodyLoaded: bodyLoaded,
         search: search,
+        getHome: getHome,
         refresh: refresh,
+        redirect:redirect,
         addToCart: addToCart,
         removeFromCart: removeFromCart,
         onchangedEvent: onchangedEvent,
         content: {
             searchTerm: "",
-            shoes: [],
         }
     };
 }());

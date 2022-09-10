@@ -1,6 +1,7 @@
 <?php
 
-class Route{
+class Route
+{
     private static $uriList = array();
     private static $uriCallback = array();
 
@@ -15,15 +16,14 @@ class Route{
         $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
         $doesUriMatch = false;
 
-        foreach(self::$uriList as $u)
-        {
-            if($u == $uri) {
+        foreach (self::$uriList as $u) {
+            if ($u == $uri) {
                 $doesUriMatch = true;
                 break;
             }
         }
 
-        if($doesUriMatch) {
+        if ($doesUriMatch) {
             call_user_func(self::$uriCallback[$uri]);
         } else {
             http_response_code(404);

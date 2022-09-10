@@ -1,12 +1,39 @@
 <?php
 // Hinzufügen des Scopes für das Model Shoe
 require '../Models/Shoe.php';
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
-session_start();
+if (isset($_POST['action']) && !empty(isset($_POST['action']))) {
+    $action = $_POST['action'];
 
-function GetTestData()
-{
-    echo true;
+    switch ($action) {
+
+        case "AddToCart": {
+                if (isset($_POST['param1'])) {
+                    $param1 = $_POST['param1'];
+                    AddToCart($param1);
+                }
+            }
+            break;
+        case "RemoveFromCart": {
+                if (isset($_POST['param1'])) {
+                    $param1 = $_POST['param1'];
+                    RemoveFromCart($param1);
+                }
+            }
+            break;
+
+        case "RefreshHeadCart": {
+                include_once "../views/cartHead.php";
+            }
+            break;
+
+        default: {
+                // do not forget to return default data, if you need it...
+            }
+    }
 }
 
 function AddToCart(int $index)
@@ -48,9 +75,7 @@ function RemoveFromCart(int $index)
         foreach ($_SESSION["cart"] as $key => $row) {
             if ($row->Id == $index) {
 
-                echo array_search($key,$_SESSION["cart"],true);
-
-                // unset($_SESSION["cart"][$key]);
+                echo array_search($key, $_SESSION["cart"], true);
             }
         }
 
@@ -96,32 +121,4 @@ function GetData(string $query = null)
     }
 }
 
-if (isset($_POST['action']) && !empty(isset($_POST['action']))) {
-    $action = $_POST['action'];
 
-    switch ($action) {
-        case "GetTestData": {
-                GetTestData();
-            }
-            break;
-
-        case "AddToCart": {
-                if (isset($_POST['param1'])) {
-                    $param1 = $_POST['param1'];
-                    AddToCart($param1);
-                }
-            }
-            break;
-        case "RemoveFromCart": {
-                if (isset($_POST['param1'])) {
-                    $param1 = $_POST['param1'];
-                    RemoveFromCart($param1);
-                }
-            }
-            break;
-
-        default: {
-                // do not forget to return default data, if you need it...
-            }
-    }
-}
