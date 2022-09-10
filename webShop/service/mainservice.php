@@ -55,6 +55,7 @@ function AddToCart(int $index)
         }
 
         array_push($_SESSION["cart"], $shoe);
+        sort($_SESSION["cart"]);
 
         echo true;
     } else {
@@ -67,35 +68,20 @@ function RemoveFromCart(int $index)
     // get data from session
     if (isset($_SESSION['cart'])) {
 
-        echo '<pre>';
-        var_dump($_SESSION);
-        echo '</pre>';
-
         //Remove from array
         foreach ($_SESSION["cart"] as $key => $row) {
             if ($row->Id == $index) {
+                unset($_SESSION["cart"][$key]);
 
-                echo array_search($key, $_SESSION["cart"], true);
+                // reassign keys
+                $_SESSION["cart"] = array_values($_SESSION["cart"]);
+                break;
             }
         }
 
         echo true;
     } else {
         echo false;
-    }
-}
-
-function UpdateCart()
-{
-    if (isset($_SESSION["isCart"])) {
-        $_SESSION["isCart"] = true;
-    }
-}
-
-function ShowShoes()
-{
-    if (isset($_SESSION["isCart"])) {
-        $_SESSION["isCart"] = false;
     }
 }
 
@@ -120,5 +106,3 @@ function GetData(string $query = null)
         // die('Ungültige Abfrage: ' . mysqli_error());
     }
 }
-
-

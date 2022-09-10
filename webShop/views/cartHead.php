@@ -8,10 +8,10 @@
     ?>
 
     <div class="row">
-        <span>
+        <span class="space">
             Einkaufswagen
         </span>
-        <i class="fas fa-shopping-cart pt-1">
+        <i class="fas fa-shopping-cart pt-1 space">
             <span><?php echo count($_SESSION["cart"]) ?></span>
         </i>
         <div class="col">
@@ -20,3 +20,12 @@
     </div>
     
 <?php endif ?>
+
+<style>
+
+.space
+{
+    margin-bottom: 4px;
+}
+
+</style>

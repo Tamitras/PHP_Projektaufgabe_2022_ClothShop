@@ -12,11 +12,11 @@ if (!isset($_SESSION["shoes"])) {
 
     array_push(
         $_SESSION["shoes"],
-        new Shoe(1, "Schuh1", 19.99, "Schuh der nicht passen wird", "views\images\shoes\blue.svg"),
+        new Shoe(1, "Schuh1", 19.99, "Schuh der nicht passen wird", "views\images\shoes\orange.svg"),
         new Shoe(2, "Schuh2", 24.99, "Schmerzt schon beim Ansehen", "views/images/shoes/green.svg"),
         new Shoe(3, "Schuh3", 18.99, "Schmerzt schon beim Ansehen", "views/images\shoes\blue.svg"),
         new Shoe(4, "Schuh4", 14.95, "Schmerzt schon beim Ansehen", "views/images/shoes/pink.svg"),
-        new Shoe(5, "Schuh5", 99.99, "Schmerzt schon beim Ansehen", "views/images/shoes/blue.svg"),
+        new Shoe(5, "Schuh5", 99.99, "Schmerzt schon beim Ansehen", "views/images/shoes/orange.svg"),
     );
 }
 

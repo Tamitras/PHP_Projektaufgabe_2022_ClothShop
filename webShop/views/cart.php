@@ -14,7 +14,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
         echo ShowCart();
     } else {
-        var_dump($_SESSION["cart"]);
         $_SESSION["cart"] = array();
         echo ShowCart();
     }
@@ -26,7 +25,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 function ShowCart()
 {
     $errorMessage = "";
-
     $group = array();
     $sumPrice = 0.00;
     foreach ($_SESSION["cart"] as $element) {
@@ -38,7 +36,7 @@ function ShowCart()
     $notEmpty = "<div><h1>Warenkorb</h1></div>";
     $cartString = (count($_SESSION["cart"]) == 0) ? $isEmpty : $notEmpty;
 
-    $resultcontent = '<div>
+    $resultcontent = '<div class="content">
                         <div class="row" style="border-bottom:1px solid black">
                             <div class="col d-flex justify-content-center">    
                                 <h1>' . $cartString . '</h1>
@@ -48,10 +46,10 @@ function ShowCart()
     foreach ($group as $list) {
         $resultcontent .=   '<div class="row align-items-center" style="padding-top: 10px;padding-bottom: 5px; margin-bottom: 5px;border: 1px solid black; border-radius:15px">
                                 <div class="col-1 d-flex justify-content-center">
-                                    <i style="cursor:pointer;" onclick="index.removeFromCart(' . $list[0]->Id . ');" class="fa-sharp fa-solid fa-trash fa-lg"></i>
+                                    <i style="cursor:pointer;" onclick="index.addOrRemoveCartItem(' . $list[0]->Id . ');" class="fa-sharp fa-solid fa-trash fa-lg"></i>
                                 </div>
                                 <div class="col-3 d-flex justify-content-center">
-                                    <img width="100%" height="auto" style="max-width:300px;" src="' . $list[0]->Src . '"></img>
+                                    <img width="100%" height="auto" style="max-width:200px;" src="' . $list[0]->Src . '"></img>
                                 </div>
                                 <div class="col-2 d-flex flex-column">
                                 <div hidden>ID:</div>
@@ -89,9 +87,6 @@ function ShowCart()
         }
     }
 
-
-
     echo $resultcontent;
 }
-
 ?>

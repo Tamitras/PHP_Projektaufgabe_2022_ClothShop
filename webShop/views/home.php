@@ -30,7 +30,7 @@ require __DIR__ . '/header.php';
                                 <p class="card-text">Beschreibung: <?php echo $shoe->Description ?> </p>
                                 <p class="card-text">Preis: <?php echo $shoe->Price ?> €</p>
                                 <a hidden href="#" class="btn btn-primary">Details</a>
-                                <button id="btnAddToCart" onclick="index.addToCart('<?php echo $shoe->Id ?>');" class="btn btn-success">In den Warenkorb</button>
+                                <button id="btnAddToCart" onclick="index.addOrRemoveCartItem('<?php echo $shoe->Id ?>', 'AddToCart');" class="btn btn-success">In den Warenkorb</button>
                             </div>
                         </div>
                     </div>
