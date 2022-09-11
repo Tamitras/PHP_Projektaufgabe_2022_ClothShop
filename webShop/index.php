@@ -57,4 +57,12 @@ Route::add($wildcard . '/cart.php', function () {
     require __DIR__ . '/views/cart.php';
 });
 
+Route::add($wildcard . '/contact.php', function () {
+    require __DIR__ . '/views/contact.php';
+});
+
+Route::add($wildcard . '/contact', function () {
+    require __DIR__ . '/views/contact.php';
+});
+
 Route::submit();

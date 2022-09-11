@@ -9,7 +9,7 @@ class Contact
     public string $Email = "max.mustermann@gmail.com";
 
     // Konsturktor
-    public function __construct(int $id, ?string $name, float $lastName, string $newsletter, string $email)
+    public function __construct(int $id, ?string $name, float $lastName, bool $newsletter, string $email)
     {
         $this->Id = $id;
         $this->Name = $name;

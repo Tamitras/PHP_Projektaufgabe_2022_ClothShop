@@ -12,11 +12,57 @@ import {
     consoleHelper as helper
 } from "./js/header.js";
 
+// import data0 from './plz/0xxxx.json';
+// import data1 from './plz/1xxxx.json';
+// import data2 from './plz/2xxxx.json';
+// import data3 from './plz/3xxxx.json';
+// import data4 from './plz/4xxxx.json';
+// import data5 from './plz/5xxxx.json';
+// import data6 from './plz/6xxxx.json';
+// import data7 from './plz/7xxxx.json';
+
 //
 export const index = (function () {
-    
+
     $('#cartHead').click(function () {
         redirect("cart.php");
+    });
+
+    // $('#plz').change(function () {
+    //     alert("");
+    // });
+
+    $("#plz").on("input", function () {
+        var value = $("#plz")[0].value;
+
+        if (value.length > 4) {
+            console.log("Suche nach Städten");
+
+            var json = []
+
+            fetch('./plz/0xxxx.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // console.log(data);
+
+                    var city = data[value];
+                    
+                    if(city)
+                    {
+                        var cityName = city["PLZ-ONAME"];
+                        $("#city").val(cityName)
+                    }
+                })
+                .catch(function () {
+                    this.dataError = true;
+                })
+
+        }
     });
 
     function redirect(path) {
@@ -29,7 +75,7 @@ export const index = (function () {
             var substrings = window.location.href.split("/");
             var newPathName = "";
             substrings.forEach((element, index) => {
-                if (index != substrings.length -1) {
+                if (index != substrings.length - 1) {
                     newPathName += element + "/";
                 }
             });
