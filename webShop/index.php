@@ -65,4 +65,12 @@ Route::add($wildcard . '/contact', function () {
     require __DIR__ . '/views/contact.php';
 });
 
+Route::add($wildcard . '/confirmation.php', function () {
+    require __DIR__ . '/views/confirmation.php';
+});
+
+Route::add($wildcard . '/confirmation', function () {
+    require __DIR__ . '/views/confirmation.php';
+});
+
 Route::submit();

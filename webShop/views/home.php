@@ -1,16 +1,10 @@
 <?php
-function autoload($className)
-{
-    // require_once "Models/Shoe.php";
-    require_once "Models/" . $className . ".php";
-}
-
-spl_autoload_register('autoload');
+require __DIR__ . '/header.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-require __DIR__ . '/header.php';
+
 ?>
 
 <?php
@@ -36,7 +30,7 @@ if ($result->num_rows > 0) {
         $_SESSION["shoes"] = array();
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            echo "id: " . $row["Id"] . " - Name: " . $row["Name"] . " " . $row["Description"] . "<br>";
+            // echo "id: " . $row["Id"] . " - Name: " . $row["Name"] . " " . $row["Description"] . "<br>";
             array_push(
                 $_SESSION["shoes"],
                 new Shoe($row["Id"], $row["Name"], $row["Price"], $row["Description"], $row["Src"]),

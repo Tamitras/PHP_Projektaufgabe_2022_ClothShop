@@ -1,5 +1,8 @@
 <?php
 
+require_once "Models/Shoe.php";
+require_once "Models/Contact.php";
+
 class Route
 {
     private static $uriList = array();

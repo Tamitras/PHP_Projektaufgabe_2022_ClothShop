@@ -30,6 +30,7 @@ function ShowCart()
         $group[$element->Id][] = $element;
         $sumPrice += $element->Price;
     }
+    $redirectTo = (isset($_SESSION["contact"])) ? "confirmation.php" : "contact.php";
 
     $isEmpty = "<div><h1>Warenkorb Leer</h1></div>";
     $notEmpty = "<div><h1>Warenkorb</h1></div>";
@@ -76,7 +77,7 @@ function ShowCart()
                             </div>';
 
         $resultcontent .= '<div class="d-grid gap-2 col-6 mx-auto" style="padding-top:15px">
-                                <button disabled title="Es müssen noch Kontaktdaten eingegeben werden" type="button" class="btn btn-warning">
+                                <button onclick="index.checkout();" title="Es müssen noch Kontaktdaten eingegeben werden" type="button" class="btn btn-warning">
                                     <span>Zur Kasse gehen</span>
                                 </button>
                             </div>';
@@ -89,3 +90,4 @@ function ShowCart()
     echo $resultcontent;
 }
 ?>
+

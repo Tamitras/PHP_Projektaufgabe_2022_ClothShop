@@ -1,10 +1,10 @@
 <?php
-function autoload($className)
-{
-    require_once "Models/" . $className . ".php";
-}
+// function autoload($className)
+// {
+//     require_once "Models/" . $className . ".php";
+// }
 
-spl_autoload_register('autoload');
+// spl_autoload_register('autoload');
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
@@ -14,37 +14,55 @@ require __DIR__ . '/header.php';
 
 
 <section class="content">
-    <form action="contact.php" method="post">
-        <div class="elem-group">
-            <label for="name">Vorname</label>
-            <input type="text" id="name" name="name" placeholder="Max" pattern=[A-Z\sa-z]{3,20} required>
-        </div>
-        <div class="elem-group">
-            <label for="name">Nachname</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Mustermann" pattern=[A-Z\sa-z]{3,20} required>
-        </div>
-        <div class="elem-group">
-            <label for="email">Email Adresse</label>
-            <input type="email" id="email" name="email" placeholder="max.mustermann@email.com" required>
-        </div>
 
-        <div class="elem-group">
-            <label for="name">Plz</label>
-            <input id="plz" type="text" id="plz" name="plz" required>
-        </div>
+    <?php if (!isset($_SESSION["contact"])) :  ?>
+        <div style="border: 1px solid black;">
+            <form action="contact.php" method="post">
+                <div class="elem-group">
+                    <label for="name">Vorname</label>
+                    <input type="text" id="name" name="name" placeholder="Max" pattern=[A-Z\sa-z]{3,20} required>
+                </div>
+                <div class="elem-group">
+                    <label for="name">Nachname</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Mustermann" pattern=[A-Z\sa-z]{3,20} required>
+                </div>
+                <div class="elem-group">
+                    <label for="email">Email Adresse</label>
+                    <input type="email" id="email" name="email" placeholder="max.mustermann@email.com" required>
+                </div>
 
-        <div class="elem-group">
-            <label for="title">Stadt</label>
-            <input type="text" id="city" name="city" required>
-        </div>
+                <div class="elem-group">
+                    <label for="name">Plz</label>
+                    <input id="plz" type="text" id="plz" name="plz" required>
+                </div>
 
-        <div class="elem-group">
-            <label for="newsletter">Newsletter</label>
-            <input type="checkbox" id="newsletter" name="newsletter" pattern=[A-Za-z0-9\s]{8,60}>
-        </div>
-        <button type="submit">Speichern</button>
+                <div class="elem-group">
+                    <label for="title">Stadt</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
 
-    </form>
+                <div class="elem-group">
+                    <label for="title">Staßenname</label>
+                    <input type="text" id="streetName" name="streetName" required>
+                </div>
+
+                <div class="elem-group">
+                    <label for="title">Nummer</label>
+                    <input type="text" id="streetNumber" name="streetNumber" required>
+                </div>
+
+                <div class="elem-group">
+                    <label for="newsletter">Newsletter</label>
+                    <input type="checkbox" id="newsletter" name="newsletter" pattern=[A-Za-z0-9\s]{8,60}>
+                </div>
+                <button type="submit">Speichern</button>
+            </form>
+        </div>
+    <?php else : ?>
+        <div> <?php echo $_SESSION["contact"]->Name ?>, Sie sind bereits registriert</div>
+    <?php endif ?>
+
+
 </section>
 
 
@@ -74,26 +92,22 @@ if ($_POST) {
     ) {
         $name = $_POST['name'];
         $lastName = $_POST['lastName'];
-        $email = $_POST['email'];
         $plz = $_POST['plz'];
         $city = $_POST['city'];
+        $streetName = $_POST['streetName'];
+        $streetNumber = $_POST['streetNumber'];
+        $email = $_POST['email'];
         $newsletter = $_POST['newsletter'];
 
+        // refresh page :)
 
-        // $email_body .= "</div>";
 
-        // $headers  = 'MIME-Version: 1.0' . "\r\n"
-        //     . 'Content-type: text/html; charset=utf-8' . "\r\n"
-        //     . 'From: ' . $email . "\r\n";
-
-        // if (mail($recipient, $email_title, $email_body, $headers)) {
-        //     echo "<p>Thank you for contacting us, $name. You will get a reply within 24 hours.</p>";
-        // } else {
-        //     echo '<p>We are sorry but the email did not go through.</p>';
-        // }
-
+        $contact = new Contact(-1, $name, $lastName, $city, $plz, $streetName, $streetNumber, $newsletter, $email);
+        $_SESSION["contact"] = $contact;
 
         echo "Perfekt, sie wurden angelegt";
+
+        header("cart.php");
     } else {
         echo '<p>Something went wrong</p>';
     }

@@ -1,6 +1,5 @@
 /*
 Mehr Informationen über Module Pattern:
-
     https://blog.mayflower.de/4392-JS-Module-Pattern.html
     https://javascript.plainenglish.io/data-hiding-with-javascript-module-pattern-62b71520bddd
 
@@ -19,14 +18,35 @@ export const index = (function () {
         redirect("cart.php");
     });
 
+    function checkout() {
+        // const value = $("#checkoutValue")[0].value;
+
+        var el = $('#checkoutValue')
+
+        if (el.length > 0) {
+
+
+            if (el[0].name.trim()) {
+                redirect("confirmation.php", true);
+            }
+            else {
+                redirect("contact.php");
+            }
+        }
+        else{
+            redirect("contact.php");
+        }
+    }
+
+
     $("#plz").on("input", function () {
-        var value = $("#plz")[0].value;
+        const value = $("#plz")[0].value;
 
         if (value.length > 4) {
             console.log("Suche nach Städten");
             const startNumber = value[0];
 
-            var json = []
+            let json = []
 
             fetch(`./plz/${startNumber}xxxx.json`)
                 .then(response => {
@@ -37,9 +57,8 @@ export const index = (function () {
                 })
                 .then(data => {
                     var cityObject = data[value];
-                    
-                    if(cityObject)
-                    {
+
+                    if (cityObject) {
                         var cityName = cityObject["PLZ-ONAME"];
                         $("#city").val(cityName)
                     }
@@ -48,13 +67,12 @@ export const index = (function () {
                     this.dataError = true;
                 })
         }
-        else
-        {
+        else {
             $("#city").val("");
         }
     });
 
-    function redirect(path) {
+    function redirect(path, newTab = false) {
 
         if (window.location.href[window.location.href.length - 1].includes("/")) {
             window.location.href += path;
@@ -69,7 +87,13 @@ export const index = (function () {
                 }
             });
 
-            window.location.href = newPathName + path;
+            if (newTab) {
+                window.open(newPathName + path, "_blank");
+            }
+            else {
+
+                window.location.href = newPathName + path;
+            }
         }
     }
 
@@ -142,6 +166,7 @@ export const index = (function () {
         bodyLoaded: bodyLoaded,
         getHome: getHome,
         redirect: redirect,
+        checkout: checkout,
         addOrRemoveCartItem: addOrRemoveCartItem,
         onchangedEvent: onchangedEvent,
         content: {
