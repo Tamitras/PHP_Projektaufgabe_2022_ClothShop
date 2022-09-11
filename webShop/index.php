@@ -2,6 +2,8 @@
 // Einbinden einer anderen php datei
 require __DIR__ . '/router.php';
 
+error_reporting(E_ALL);
+
 //Zugriff auf die Klassenfunktionalität
 $fullPathSubStrings = explode("\\", __DIR__);
 $rootPathSubStrings = explode("/", $_SERVER["DOCUMENT_ROOT"]);

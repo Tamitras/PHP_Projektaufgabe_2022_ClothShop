@@ -66,6 +66,10 @@ if (!isset($_SESSION["cart"])) {
                     <a class="text-white text-decoration-none"><b>Entdecke unsere Vielfalt | WomanShoe</b></a>
                 </div>
             </div>
+
+            <div class="box">
+                <img class="bgimg" src="./views/images/bgIMG.jpg">
+            </div>
         </div>
 
     </section>
@@ -133,5 +137,19 @@ if (!isset($_SESSION["cart"])) {
 
     .flex-fixed-width-item {
         flex: 0 0 160px;
+    }
+</style>
+
+<style type="text/css">
+    .bgimg {
+        /* max-width: 100%;
+        max-height: 100%;
+        display: block; */
+        width: inherit;
+        /* remove extra space below image */
+    }
+    .box
+    {
+        width: inherit;
     }
 </style>

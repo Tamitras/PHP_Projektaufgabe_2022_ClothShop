@@ -60,9 +60,9 @@ $conn->close();
                         <div class="col">
                             <div class="card-body">
                                 <div hidden><?php $shoe->Id ?></div>
-                                <h5 class="card-title">Titel: <?php echo $shoe->Name ?></h5>
-                                <p class="card-text">Beschreibung: <?php echo $shoe->Description ?> </p>
-                                <p class="card-text">Preis: <?php echo $shoe->Price ?> €</p>
+                                <h5 class="card-title"><?php echo $shoe->Name ?></h5>
+                                <p class="card-text"><?php echo $shoe->Description ?> </p>
+                                <p class="card-text"><b><?php echo $shoe->Price ?> €</b></p>
                                 <a hidden href="#" class="btn btn-primary">Details</a>
                                 <button id="btnAddToCart" onclick="index.addOrRemoveCartItem('<?php echo $shoe->Id ?>', 'AddToCart');" class="btn btn-success">In den Warenkorb</button>
                             </div>

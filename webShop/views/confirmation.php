@@ -5,12 +5,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 ?>
 
-<?php
-
-echo "Zusammenfassung";
-
-?>
-
 
 <div class="content">
     <h1>Vielen Dank für Ihre Bestellung</h1>
