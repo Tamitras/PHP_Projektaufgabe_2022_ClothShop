@@ -12,6 +12,45 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 require __DIR__ . '/header.php';
 ?>
 
+<?php
+$servername = "localhost"; /* 127.0.0.01:3306 */
+$username = "root";
+$password = "root";
+$dbname = "clothshop";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM Shoe";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    //  TestDataSection
+    if (!isset($_SESSION["shoes"])) {
+        $_SESSION["shoes"] = array();
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "id: " . $row["Id"] . " - Name: " . $row["Name"] . " " . $row["Description"] . "<br>";
+            array_push(
+                $_SESSION["shoes"],
+                new Shoe($row["Id"], $row["Name"], $row["Price"], $row["Description"], $row["Src"]),
+            );
+        }
+    }
+    else{
+        // Shoes bereits in der Session
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+?>
+
 <section class="content">
     <div class="row">
         <?php if (isset($_SESSION["shoes"]) && count($_SESSION["shoes"]) > 0) : ?>
@@ -39,7 +78,6 @@ require __DIR__ . '/header.php';
         <?php endif ?>
     </div>
 </section>
-
 
 <!-- ==================================== -->
 <section class="call-to-action bg-gray section">

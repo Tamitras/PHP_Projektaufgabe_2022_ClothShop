@@ -10,4 +10,4 @@ session_destroy();
 
 ?>
 
-<a href="/home.php"> Zurück</a>
+<a href="home.php"> Zurück</a>
