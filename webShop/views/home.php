@@ -1,7 +1,8 @@
 <?php
 function autoload($className)
 {
-    require_once "Models/Shoe.php";
+    // require_once "Models/Shoe.php";
+    require_once "Models/" . $className . ".php";
 }
 
 spl_autoload_register('autoload');

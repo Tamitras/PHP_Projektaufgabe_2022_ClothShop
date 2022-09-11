@@ -5,7 +5,7 @@ class Contact
     public int $Id = -1;
     public string $Name = 'Testname';
     public string $LastName = "Dies ist ein toller Schuh";
-    public string $Newsletter = false;
+    public bool $Newsletter = false;
     public string $Email = "max.mustermann@gmail.com";
 
     // Konsturktor

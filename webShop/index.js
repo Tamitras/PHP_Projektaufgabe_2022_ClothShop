@@ -12,15 +12,6 @@ import {
     consoleHelper as helper
 } from "./js/header.js";
 
-// import data0 from './plz/0xxxx.json';
-// import data1 from './plz/1xxxx.json';
-// import data2 from './plz/2xxxx.json';
-// import data3 from './plz/3xxxx.json';
-// import data4 from './plz/4xxxx.json';
-// import data5 from './plz/5xxxx.json';
-// import data6 from './plz/6xxxx.json';
-// import data7 from './plz/7xxxx.json';
-
 //
 export const index = (function () {
 
@@ -28,19 +19,16 @@ export const index = (function () {
         redirect("cart.php");
     });
 
-    // $('#plz').change(function () {
-    //     alert("");
-    // });
-
     $("#plz").on("input", function () {
         var value = $("#plz")[0].value;
 
         if (value.length > 4) {
             console.log("Suche nach Städten");
+            const startNumber = value[0];
 
             var json = []
 
-            fetch('./plz/0xxxx.json')
+            fetch(`./plz/${startNumber}xxxx.json`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("HTTP error " + response.status);
@@ -48,20 +36,21 @@ export const index = (function () {
                     return response.json();
                 })
                 .then(data => {
-                    // console.log(data);
-
-                    var city = data[value];
+                    var cityObject = data[value];
                     
-                    if(city)
+                    if(cityObject)
                     {
-                        var cityName = city["PLZ-ONAME"];
+                        var cityName = cityObject["PLZ-ONAME"];
                         $("#city").val(cityName)
                     }
                 })
                 .catch(function () {
                     this.dataError = true;
                 })
-
+        }
+        else
+        {
+            $("#city").val("");
         }
     });
 
