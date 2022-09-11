@@ -3,31 +3,57 @@
 require __DIR__ . '/router.php';
 
 //Zugriff auf die Klassenfunktionalität
-$spliced = explode("\\", __DIR__ );
-$wildcard = $spliced[count($spliced) -1];
-$wildcard = "/" . $wildcard;
+$fullPathSubStrings = explode("\\", __DIR__);
+$rootPathSubStrings = explode("/", $_SERVER["DOCUMENT_ROOT"]);
 
-Route::add($wildcard . '/', function() {
-    require __DIR__ .'/views/home.php';
-});
+// print "<pre>";
+// echo "fullPathSubStrings";
+// var_dump($fullPathSubStrings);
+// print "</pre>";
 
-Route::add($wildcard . '/home', function() { 
+// print "<pre>";
+// print $_SERVER["DOCUMENT_ROOT"];
+// print "</pre>";
+
+
+// print "<pre>";
+// echo "Inside loop";
+// echo "Anzahl rootPathSubStrings" . count($rootPathSubStrings);
+// print "</pre>";
+
+// print "<pre>";
+// echo "Anzahl fullPathSubStrings" . count($fullPathSubStrings);
+// print "</pre>";
+
+
+$wildcard = "";
+for ($x = count($rootPathSubStrings); $x < count($fullPathSubStrings); $x++) {
+    $wildcard .= "/" . $fullPathSubStrings[$x];
+}
+
+// echo $wildcard;
+
+Route::add($wildcard . '/', function () {
     require __DIR__ . '/views/home.php';
 });
 
-Route::add($wildcard . '/home.php', function() {
+Route::add($wildcard . '/home', function () {
     require __DIR__ . '/views/home.php';
 });
 
-Route::add($wildcard . '/index.php', function() {
+Route::add($wildcard . '/home.php', function () {
     require __DIR__ . '/views/home.php';
 });
 
-Route::add($wildcard . '/cart', function() {
+Route::add($wildcard . '/index.php', function () {
+    require __DIR__ . '/views/home.php';
+});
+
+Route::add($wildcard . '/cart', function () {
     require __DIR__ . '/views/cart.php';
 });
 
-Route::add($wildcard . '/cart.php', function() {
+Route::add($wildcard . '/cart.php', function () {
     require __DIR__ . '/views/cart.php';
 });
 

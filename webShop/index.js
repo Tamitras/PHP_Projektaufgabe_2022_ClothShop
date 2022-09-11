@@ -99,7 +99,6 @@ export const index = (function () {
     }
 
     function getHome() {
-
         redirect("home.php");
     }
 
