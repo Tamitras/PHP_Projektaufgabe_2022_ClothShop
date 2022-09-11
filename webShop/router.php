@@ -17,6 +17,7 @@ class Route
         $doesUriMatch = false;
 
         foreach (self::$uriList as $u) {
+
             if ($u == $uri) {
                 $doesUriMatch = true;
                 break;
