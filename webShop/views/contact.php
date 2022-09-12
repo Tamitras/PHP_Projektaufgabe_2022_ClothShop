@@ -163,8 +163,6 @@ if ($_POST) {
         && isset($_POST['city'])
     ) {
 
-        // echo "Daten werden überschrieben";
-
         $name = $_POST['name'];
         $lastName = $_POST['lastName'];
         $plz = $_POST['plz'];
@@ -173,20 +171,9 @@ if ($_POST) {
         $streetNumber = $_POST['streetNumber'];
         $email = $_POST['email'];
 
-        // refresh page :)
-
         $contact = new Contact(-1, $name, $lastName, $city, $plz, $streetName, $streetNumber, $email);
         $_SESSION["contact"] = $contact;
 
-        // echo "Perfekt, sie wurden angelegt";
-
-        // header("cart.php");
-        // $nextPage = __DIR__ . "/cart.php";
-        // echo $nextPage;
-        // header("Location:".$nextPage);
-        // exit;
-
-        // header("Refresh:0");
         header("refresh:0;url=cart.php" );
     }
 }
