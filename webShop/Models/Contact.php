@@ -9,7 +9,6 @@ class Contact
     public int $PLZ = 00000;
     public string $StreetName = "";
     public string $StreetNumber = "";
-    public bool $Newsletter = false;
     public string $Email = "max.mustermann@gmail.com";
 
     // Konsturktor
@@ -21,7 +20,6 @@ class Contact
         int $plz,
         string $streetName,
         string $streetNumber,
-        bool $newsletter,
         string $email
     ) {
         $this->Id = $id;
@@ -31,7 +29,6 @@ class Contact
         $this->PLZ = $plz;
         $this->StreetName = $streetName;
         $this->StreetNumber = $streetNumber;
-        $this->Newsletter = $newsletter;
         $this->Email = $email;
     }
 }

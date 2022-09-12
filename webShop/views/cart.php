@@ -7,6 +7,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 ?>
 
+<div class="box">
+    <img class="bgimg" src="./views/images/bg_shoppingCart.jpg">
+</div>
+
 <section>
     <?php
     if (isset($_SESSION["cart"]) && count($_SESSION["cart"]) > 0) {
@@ -19,6 +23,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
     ?>
 </section>
+
+<?php
+require __DIR__ . '/footer.php';
+?>
 
 <?php
 function ShowCart()
@@ -46,10 +54,10 @@ function ShowCart()
     foreach ($group as $list) {
         $resultcontent .=   '<div class="row align-items-center" style="padding-top: 10px;padding-bottom: 5px; margin-bottom: 5px;border: 1px solid black; border-radius:15px">
                                 <div class="col-1 d-flex justify-content-center">
-                                    <i style="cursor:pointer;" onclick="index.addOrRemoveCartItem(' . $list[0]->Id . ');" class="fa-sharp fa-solid fa-trash fa-lg"></i>
+                                    <i title="Entfernen" style="cursor:pointer;" onclick="index.addOrRemoveCartItem(' . $list[0]->Id . ');" class="fa-sharp fa-solid fa-trash fa-lg"></i>
                                 </div>
                                 <div class="col-3 d-flex justify-content-center">
-                                    <img width="100%" height="auto" style="max-width:200px;" src="' . $list[0]->Src . '"></img>
+                                    <img title="' . $list[0]->Name . '" width="100%" height="auto" style="max-width:200px;" src="' . $list[0]->Src . '"></img>
                                 </div>
                                 <div class="col-2 d-flex flex-column">
                                 <div hidden>ID:</div>
@@ -85,6 +93,12 @@ function ShowCart()
         if ($errorMessage != "") {
             $resultcontent .= '<div class="errorMessage">' . $errorMessage . '</div>';
         }
+    }
+    else
+    {
+        $resultcontent .= '<div>
+        <img class="bgimg_large" src="./views/images/cartEmpty.jpg"></img>
+        </div>';
     }
 
     echo $resultcontent;

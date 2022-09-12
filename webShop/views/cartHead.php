@@ -1,5 +1,4 @@
 <?php
-
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
@@ -28,6 +27,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
             <?php if (isset($_SESSION["contact"])) : ?>
                 <div>
                     <!--  -->
+                    <?php if (strlen($_SESSION["contact"]->Name) > 0) : ?>
+                        <?php echo "Benutzer: " . $_SESSION["contact"]->Name ?>
+                    <?php endif ?>
                 </div>
 
                 <input id="checkoutValue" type="hidden" name="<?php echo $_SESSION["contact"]->Name ?>">

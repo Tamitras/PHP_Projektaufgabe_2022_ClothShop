@@ -11,19 +11,19 @@ if (!isset($_SESSION["cart"])) {
 }
 ?>
 
-<body id="body">
+<body id="body" style="background-color: lightgrey;">
     <section>
-        <div class="container-fluid sticky-top mb-3" style="background-color: rgb(19 25 33)">
+        <div class="container-fluid sticky-top" style="background-color: rgb(19 25 33)">
 
             <div class="row pb-2 pt-1 align-items-center text-white" style="height: 120px;">
-                <div id="mainLogo" onclick="index.getHome()" class="col-2 d-flex justify-content-start flex-fixed-width-item" style="padding-left: 0px;">
+                <div id="mainLogo" title="www.passt.de" onclick="index.getHome()" class="col-2 d-flex justify-content-start flex-fixed-width-item" style="padding-left: 10px;">
                     <div class="buttonNoSelect ml-0 pl-0">
-                        <img src="views/images/logo.svg" width="auto" height="80">
+                        <img src="views/images/logo.svg" width="auto" height="100">
                     </div>
                 </div>
                 <div class="col-2 col-offset-2 d-flex justify-content-center buttonNoSelect flex-fixed-width-item">
                     <div class="row">
-                        <div class="col-12">Aktuelle Uhrzeit</div>
+                        <!-- <div class="col-12">Aktuelle Uhrzeit</div> -->
                         <div id="clock" class="col-12 clock text-white"></div>
                     </div>
                 </div>
@@ -33,45 +33,40 @@ if (!isset($_SESSION["cart"])) {
                     <div class="flex-grow-1">
                         <div class="input-group">
                             <input id="searchInput" oninput="index.onchangedEvent()" type="text" class="form-control form-control-lg" placeholder="Suche nach Produkt">
-                            <button onclick="index.search(this.value)" class="input-group-text btn-success bg-danger">
+                            <button onclick="alert('searching not implementet yet')" class="input-group-text btn-success bg-danger">
                                 <i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                 </div>
 
                 <!-- ShoppingCart -->
-                <div id="cartHead" class="p-2 m-1 me-2 d-flex flex-fixed-width-item">
+                <div id="cartHead" title="Einkaufswagen" class="p-2 m-1 me-2 d-flex flex-fixed-width-item">
                     <?php include 'cartHead.php'; ?>
                 </div>
             </div>
 
             <div id="navBar" class="row align-items-center text-white pt-1 pb-1" style="background-color: rgb(35 47 62); height:41px;">
                 <div id="NavBarHerren" class="col-1 d-flex justify-content-center pt-1 pb-1">
-                    <a class="text-white text-decoration-none">Herren</a>
+                    <a href="./" class="text-white text-decoration-none">Herren</a>
                 </div>
                 <div id="NavBarDamen" class="col-1 d-flex justify-content-center pt-1 pb-1">
-                    <a class="text-white text-decoration-none">Damen</a>
+                    <a href="./" class="text-white text-decoration-none">Damen</a>
                 </div>
                 <div id="NavBarKids" class="col-1 d-flex justify-content-center pt-1 pb-1">
-                    <a class="text-white text-decoration-none">Kids</a>
+                    <a href="./" class="text-white text-decoration-none">Kids</a>
                 </div>
                 <div id="NavBarAccessoires" class="col-1 d-flex justify-content-center pt-1 pb-1">
-                    <a class="text-white text-decoration-none">Accessoires</a>
+                    <a href="./" class="text-white text-decoration-none">Accessoires</a>
                 </div>
 
-                <!-- Space -->
-                <div class="col-4"></div>
+                <!-- Space offset -->
+                <div class="col-3"></div>
 
-                <div id="NavBarExplore" class="col d-flex justify-content-center pt-1 pb-1">
+                <div id="NavBarExplore" class="col-5 d-flex justify-content-center pt-1 pb-1">
                     <a class="text-white text-decoration-none"><b>Entdecke unsere Vielfalt | WomanShoe</b></a>
                 </div>
             </div>
-
-            <div class="box">
-                <img class="bgimg" src="./views/images/bgIMG.jpg">
-            </div>
         </div>
-
     </section>
 </body>
 
@@ -140,16 +135,3 @@ if (!isset($_SESSION["cart"])) {
     }
 </style>
 
-<style type="text/css">
-    .bgimg {
-        /* max-width: 100%;
-        max-height: 100%;
-        display: block; */
-        width: inherit;
-        /* remove extra space below image */
-    }
-    .box
-    {
-        width: inherit;
-    }
-</style>

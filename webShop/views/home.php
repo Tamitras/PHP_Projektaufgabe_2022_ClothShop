@@ -36,8 +36,7 @@ if ($result->num_rows > 0) {
                 new Shoe($row["Id"], $row["Name"], $row["Price"], $row["Description"], $row["Src"]),
             );
         }
-    }
-    else{
+    } else {
         // Shoes bereits in der Session
     }
 } else {
@@ -45,6 +44,56 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
+
+<div class="box">
+    <img class="bgimg" src="./views/images/bgIMG.jpg">
+</div>
+
+
+<?php if (!isset($_SESSION["hasNewsletter"])) : ?>
+
+    <!-- ==================================== -->
+    <section class="call-to-action bg-gray section">
+        <div class="container">
+            <form action="newsletter.php" method="get">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="title">
+                            <h2>SUBSCRIBE TO NEWSLETTER</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut sequi. Minus facilis vitae excepturi sit laboriosam.</p>
+                        </div>
+                        <div class="col">
+                            <div class="input-group subscription-form">
+                                <input type="text" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="form-control" placeholder="Enter Your Email Address" value="" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-main" type="submit">Subscribe Now!</button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+                    </div>
+                </div> <!-- End row -->
+            </form>
+        </div> <!-- End container -->
+    </section> <!-- End section -->
+<?php else : ?>
+    <section class="call-to-action bg-gray section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="title">
+                        <?php if (strlen($_SESSION["hasNewsletter"]) > 0) : ?>
+                            <h2><?php echo $_SESSION["hasNewsletter"] . ' <h3>Sie haben sich erfolgreich zum Newsletter angemeldet!</h3>'  ?></h2>
+                            <?php $_SESSION["hasNewsletter"] = ""; ?>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div> <!-- End row -->
+        </div> <!-- End container -->
+    </section> <!-- End section -->
+
+<?php endif ?>
+
 
 <section class="content">
     <div class="row">
@@ -55,7 +104,7 @@ $conn->close();
                 <div class="col-xs-12 col-sm-12 col-md-6 col-xxl-3 col-lg-6 col-xl-4">
                     <div class="card m-2 p-3" style="border-radius:25px;">
                         <div class="col border-3 buttonNoSelect">
-                            <img style="background: black; border-radius:25px;" src='<?php echo $shoe->Src ?>' class="card-img-top p-3">
+                            <img style="background: darkgrey; border-radius:25px;" src='<?php echo $shoe->Src ?>' class="card-img-top p-3">
                         </div>
                         <div class="col">
                             <div class="card-body">
@@ -74,28 +123,6 @@ $conn->close();
     </div>
 </section>
 
-<!-- ==================================== -->
-<section class="call-to-action bg-gray section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="title">
-                    <h2>SUBSCRIBE TO NEWSLETTER</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut sequi. Minus facilis vitae excepturi sit laboriosam.</p>
-                </div>
-                <div class="col">
-                    <div class="input-group subscription-form">
-                        <input type="text" class="form-control" placeholder="Enter Your Email Address">
-                        <span class="input-group-btn">
-                            <button class="btn btn-main" type="button">Subscribe Now!</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-
-            </div>
-        </div> <!-- End row -->
-    </div> <!-- End container -->
-</section> <!-- End section -->
 
 <?php
 require __DIR__ . '/footer.php';

@@ -1,6 +1,8 @@
 <?php
 // Hinzufügen des Scopes für das Model Shoe
 require '../Models/Shoe.php';
+require '../Models/Contact.php';
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
@@ -85,24 +87,3 @@ function RemoveFromCart(int $index)
     }
 }
 
-function GetData(string $query = null)
-{
-    $db_link = mysqli_connect(
-        // MYSQL_HOST,
-        // MYSQL_BENUTZER,
-        // MYSQL_KENNWORT,
-        // MYSQL_DATENBANK
-        "host",
-        "username",
-        "password",
-        "database"
-    );
-
-    $sql = "SELECT * FROM adressen";
-    $sql2 = $query;
-
-    $db_erg = mysqli_query($db_link, $sql);
-    if (!$db_erg) {
-        // die('Ungültige Abfrage: ' . mysqli_error());
-    }
-}

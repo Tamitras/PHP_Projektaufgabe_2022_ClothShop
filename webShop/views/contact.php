@@ -5,14 +5,14 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 if (!isset($_SESSION["contact"])) {
     $_SESSION["contact"] = new Contact(0, "", "", "", 0, "", "", true, "");
-} else {
-    // echo "ContactInfo vorhanden";
-    // var_dump($_SESSION["contact"]);
 }
 
 require __DIR__ . '/header.php';
 ?>
 
+<div class="box">
+    <img class="bgimg" src="./views/images/contact.jpg">
+</div>
 
 <section class="content">
 
@@ -22,54 +22,120 @@ require __DIR__ . '/header.php';
                 Aktueller Benutzer: <?php echo $_SESSION["contact"]->Name ?>
             </div>
         <?php else : ?>
-
-
-
             <div style="border: 1px solid black;">
-
                 <form action="contact.php" method="post">
-                    <div class="elem-group">
-                        <label for="name">Vorname</label>
-                        <input type="text" id="name" name="name" placeholder="Max" pattern=[A-Z\sa-z]{3,20} value="<?php echo $_SESSION["contact"]->Name ?>" required>
-                    </div>
-                    <div class="elem-group">
-                        <label for="name">Nachname</label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Mustermann" pattern=[A-Z\sa-z]{3,20} value="<?php echo $_SESSION["contact"]->LastName ?>" required>
-                    </div>
-                    <div class="elem-group">
-                        <label for="email">Email Adresse</label>
-                        <input type="email" id="email" name="email" placeholder="max.mustermann@email.com" value="<?php echo $_SESSION["contact"]->Email ?>" required>
-                    </div>
+                    <section class="section pt-5">
+                        <div class="container">
+                            <div class="row">
 
-                    <div class="elem-group">
-                        <label for="name">Plz</label>
-                        <input id="plz" type="text" id="plz" name="plz" value="<?php echo $_SESSION["contact"]->PLZ ?>" required>
-                    </div>
+                                <!-- Name -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">Vorname</label>
+                                        </div>
+                                    </div>
 
-                    <div class="elem-group">
-                        <label for="title">Stadt</label>
-                        <input type="text" id="city" name="city" value="<?php echo $_SESSION["contact"]->City ?>" required>
-                    </div>
+                                    <div class="col">
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="Max" pattern=[A-Z\sa-z]{3,20} value="<?php echo $_SESSION["contact"]->Name ?>" required>
+                                    </div>
+                                </div>
 
-                    <div class="elem-group">
-                        <label for="title">Staßenname</label>
-                        <input type="text" id="streetName" name="streetName" value="<?php echo $_SESSION["contact"]->StreetName ?>" required>
-                    </div>
+                                <!-- Name -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">Nachname</label>
+                                        </div>
+                                    </div>
 
-                    <div class="elem-group">
-                        <label for="title">Nummer</label>
-                        <input type="text" id="streetNumber" name="streetNumber" value="<?php echo $_SESSION["contact"]->StreetNumber ?>" required>
-                    </div>
+                                    <div class="col">
+                                        <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Mustermann" pattern=[A-Z\sa-z]{3,20} value="<?php echo $_SESSION["contact"]->LastName ?>" required>
+                                    </div><!-- /.col-lg-6 -->
+                                </div>
 
-                    <div class="elem-group">
-                        <label for="newsletter">Newsletter</label>
-                        <input type="checkbox" id="newsletter" name="newsletter" pattern=[A-Za-z0-9\s]{8,60} checked="<?php echo $_SESSION["contact"]->Newsletter ?>">
-                    </div>
-                    <button type="submit">Speichern</button>
-                </form>
-            </div>
-        <?php endif; ?>
-    </div>
+                                <!-- Email -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">Email</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="email" id="email" name="email" class="form-control" value="" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"  placeholder="max.mustermann@email.com" value="<?php echo $_SESSION["contact"]->Email ?>" required>
+                                    </div><!-- /.col-lg-6 -->
+                                </div>
+
+                                <!-- Plz -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">Plz</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <input id="plz" type="text" id="plz" name="plz" class="form-control" placeholder="12345" value="<?php echo $_SESSION["contact"]->PLZ ?>" required>
+                                    </div><!-- /.col-lg-6 -->
+                                </div>
+
+                                <!-- City -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">City</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="text" id="city" name="city" placeholder="Stuttgart" class="form-control" value="<?php echo $_SESSION["contact"]->City ?>" required>
+                                    </div><!-- /.col-lg-6 -->
+                                </div>
+
+                                <!-- Name -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">Straßenname</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="text" id="streetName" name="streetName" placeholder="Teststraße" class="form-control" value="<?php echo $_SESSION["contact"]->StreetName ?>" required>
+                                    </div><!-- /.col-lg-6 -->
+                                </div>
+
+                                <!-- Name -->
+                                <div class="col-md-12 text-center">
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <label for="name">Nummer</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="text" id="streetNumber" name="streetNumber" placeholder="1337" class="form-control" value="<?php echo $_SESSION["contact"]->StreetNumber ?>" required>
+                                    </div><!-- /.col-lg-6 -->
+                                </div>
+
+                                <!-- Name -->
+                                <div class="col-md-12 text-center">
+                                    <div class="elem-group row p-2">
+                                        <div class="col">
+                                            <button type="submit">Speichern</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div> <!-- End row -->
+                        </div> <!-- End row -->
+            </div> <!-- End container -->
+</section> <!-- End section -->
+
+<?php endif; ?>
+</div>
 </section>
 
 
@@ -95,7 +161,6 @@ if ($_POST) {
         && isset($_POST['email'])
         && isset($_POST['plz'])
         && isset($_POST['city'])
-        && isset($_POST['newsletter'])
     ) {
 
         // echo "Daten werden überschrieben";
@@ -107,11 +172,10 @@ if ($_POST) {
         $streetName = $_POST['streetName'];
         $streetNumber = $_POST['streetNumber'];
         $email = $_POST['email'];
-        $newsletter = $_POST['newsletter'];
 
         // refresh page :)
 
-        $contact = new Contact(-1, $name, $lastName, $city, $plz, $streetName, $streetNumber, $newsletter, $email);
+        $contact = new Contact(-1, $name, $lastName, $city, $plz, $streetName, $streetNumber, $email);
         $_SESSION["contact"] = $contact;
 
         // echo "Perfekt, sie wurden angelegt";
@@ -122,7 +186,8 @@ if ($_POST) {
         // header("Location:".$nextPage);
         // exit;
 
-        header("Refresh:0");
+        // header("Refresh:0");
+        header("refresh:0;url=cart.php" );
     }
 }
 ?>
